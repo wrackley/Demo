@@ -23,7 +23,7 @@
                                 //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
                                 var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
                                 app.controller('findLocalPetsCtrl', function($scope, $http, $resource) {
-					$scope.pets = [];
+				    $scope.pets = [];
                                     //this calls the API using GET, it passes in the Animal type, the zipcode the user wants to search and how many results to return
                                     function getAnimals(animal, zipCode, count) {
                                         //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
@@ -50,7 +50,7 @@
                                                     }
 
                                                     //this creates the individual list item for each pet return from the search 
-                                                    $scope.pets.push("<li>Name: " + value.name.$t + "-" + value.animal.$t + "<ul style=list-style:none;>" + "<li><img src='" + photoUrl + "' alt='No Image'/></li>" + "<li>Age: " + value.age.$t + "<li>Shelter ID: " + value.id.$t + "</li>" + "<li>Breed: " + catBreed + "</li>" + "</ul>" + "</li>");
+                                                    $scope.pets.push({"Name: " :value.name.$t + "-" + value.animal.$t}, {"PhotoUrl": photoUrl},  {"Age": value.age.$t}, {"Shelter ID": value.id.$t}, {"Breed: " + catBreed});
                                                 });
                                                 //this wraps all the results in an ordered list as to have a number next to each item 
                                                 $scope.searchResults = pets;
@@ -107,7 +107,7 @@
 						<button ng-click="clearResults()">Clear Results</button>					
                     </form>
 					<!-- this is where the search results are pushed to the user -->
-			<div ng-model="searchResults"><ol ng-repeat="pet in pets">{{pet}}</ol></div>
+			<div ng-model="searchResults"><ol ng-repeat="pet in pets">{{pet}}</ol><li ng-model="pet.name"></li></div>
                 </div>
             </body>
 
