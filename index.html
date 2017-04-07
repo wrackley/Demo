@@ -50,7 +50,7 @@
                                                     }
 
                                                     //this creates the individual list item for each pet return from the search 
-                                                    pets.push("<li>Name: " + value.name.$t + "-" + value.animal.$t + "<ul style=list-style:none;>" + "<li><img src='" + photoUrl + "' alt='No Image'/></li>" + "<li>Age: " + value.age.$t + "<li>Shelter ID: " + value.id.$t + "</li>" + "<li>Breed: " + catBreed + "</li>" + "</ul>" + "</li>");
+                                                    $scope.pets.push("<li>Name: " + value.name.$t + "-" + value.animal.$t + "<ul style=list-style:none;>" + "<li><img src='" + photoUrl + "' alt='No Image'/></li>" + "<li>Age: " + value.age.$t + "<li>Shelter ID: " + value.id.$t + "</li>" + "<li>Breed: " + catBreed + "</li>" + "</ul>" + "</li>");
                                                 });
                                                 //this wraps all the results in an ordered list as to have a number next to each item 
                                                 $scope.searchResults = pets;
