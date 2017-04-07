@@ -73,7 +73,7 @@
                         <h3>Find Local Pets</h3>
                         Zip Code:<br>
 						<!-- ng-pattern will only allow for valid us or Canadian postal codes -->
-                        <input type="text" ng-model="inputData.zipCode" ng-pattern="^\d{5}(?:[-\s]\d{4})?$" required>
+                        <input type="text" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
 						<br> Number of Dogs to Return(More than 2):<br>
 						<!-- requires user to enter a qty of dogs to return, numerical entries are rejected -->
                         <input type="text" ng-model="inputData.numDogs" ng-pattern=" /^[-+]?\d+$/" required>
