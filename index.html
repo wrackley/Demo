@@ -23,7 +23,7 @@
                                 //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
                                 var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
                                 app.controller('findLocalPetsCtrl', function($scope, $http, $resource) {
-				   
+				   var pets = []
                                     //this calls the API using GET, it passes in the Animal type, the zipcode the user wants to search and how many results to return
                                     function getAnimals(animal, zipCode, count) {
                                         //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
@@ -32,7 +32,7 @@
                                             .success(function(data) {                                           
 
                                                 console.log(data);   
-						$scope.pets = ($scope.pets).concat(data.petfinder.pets.pet);
+						pets = pets.concat(data.petfinder.pets.pet);
                                                     
                                                 })
                                                 //this wraps all the results in an ordered list as to have a number next to each item 
@@ -53,6 +53,7 @@
                                             //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
                                             getAnimals("cat", $scope.inputData.zipCode, $scope.inputData.numCats);
                                             getAnimals("dog", $scope.inputData.zipCode, $scope.inputData.numDogs);
+						$scope.pets = pets
                                             console.log("Zip Code:" + $scope.inputData.zipCode);
                                         } else {
 											$scope.searchResults = "<b style='color: red;' >Error:Invalid Input Parameters</b>"
