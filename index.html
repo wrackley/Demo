@@ -29,8 +29,7 @@
                                         //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
                                         var url = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&animal=" + animal + "&location=" + zipCode + "&count="+count+"&format=json&callback=JSON_CALLBACK";
                                         $http.jsonp(url)
-                                            .success(function(data) {                                           
-						console.log(pets
+                                            .success(function(data) { 
                                                 console.log(data);   
 						pets = pets.concat(data.petfinder.pets.pet);
 						console.log(pets);
