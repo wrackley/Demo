@@ -32,7 +32,7 @@
                                             .success(function(data) {                                           
 
                                                 console.log(data);   
-						$scope.pets($scope.pets).concat(data.petfinder.pets.pet);
+						$scope.pets = ($scope.pets).concat(data.petfinder.pets.pet);
                                                     
                                                 })
                                                 //this wraps all the results in an ordered list as to have a number next to each item 
