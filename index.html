@@ -107,7 +107,7 @@
 						<button ng-click="clearResults()">Clear Results</button>					
                     </form>
 					<!-- this is where the search results are pushed to the user -->
-			<div ng-model="searchResults"><ol ng-repeat="pet in pets"></ol><li>{{pet.Name}}</li></div>
+			<div ng-model="searchResults"><ol ng-repeat="pet in pets"><li>{{pet.Name}}</li></ol></div>
                 </div>
             </body>
 
