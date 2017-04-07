@@ -19,7 +19,7 @@
                         <!-- Actual scripting logic for the Application -->
                             <script>
                                 //this declares the HTML to be pushed to the user after it is dynamically created 
-                                var pets = [];
+                                $scope.pets = [];
                                 //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
                                 var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
                                 app.controller('findLocalPetsCtrl', function($scope, $http, $resource) {
