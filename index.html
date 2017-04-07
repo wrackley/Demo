@@ -19,10 +19,11 @@
                         <!-- Actual scripting logic for the Application -->
                             <script>
                                 //this declares the HTML to be pushed to the user after it is dynamically created 
-                                $scope.pets = [];
+                                
                                 //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
                                 var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
                                 app.controller('findLocalPetsCtrl', function($scope, $http, $resource) {
+					$scope.pets = [];
                                     //this calls the API using GET, it passes in the Animal type, the zipcode the user wants to search and how many results to return
                                     function getAnimals(animal, zipCode, count) {
                                         //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
