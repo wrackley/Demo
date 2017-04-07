@@ -50,7 +50,7 @@
                                                     }
 
                                                     //this creates the individual list item for each pet return from the search 
-                                                    $scope.pets.push({"Name: " :value.name.$t + "-" + value.animal.$t}, {"PhotoUrl": photoUrl},  {"Age": value.age.$t}, {"Shelter ID": value.id.$t}, {"Breed: " + catBreed});
+                                                    $scope.pets.push({"Name: " :value.name.$t + "-" + value.animal.$t}, {"PhotoUrl": photoUrl},  {"Age": value.age.$t}, {"Shelter ID": value.id.$t}, {"Breed":  catBreed});
                                                 });
                                                 //this wraps all the results in an ordered list as to have a number next to each item 
                                                 $scope.searchResults = pets;
