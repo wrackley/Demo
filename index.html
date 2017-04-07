@@ -23,7 +23,8 @@
                                 //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
                                 var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
                                 app.controller('findLocalPetsCtrl', function($scope, $http, $resource) {
-				    $scope.pets = [];				                                        //this calls the API using GET, it passes in the Animal type, the zipcode the user wants to search and how many results to return
+			            var pets = [];
+				    $scope.pets = [];				                                        
                                     function getAnimals(animal, zipCode, count) {
                                         //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
                                         var url = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&animal=" + animal + "&location=" + zipCode + "&count="+count+"&format=json&callback=JSON_CALLBACK";
@@ -39,7 +40,7 @@
 
                                     }
                                     $scope.findPets = function() {
-					var pets = [];
+					pets = [];
                                         if ($scope.findPetsForm.$valid) {                                            
                                             //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
                                             getAnimals("cat", $scope.inputData.zipCode, $scope.inputData.numCats);
