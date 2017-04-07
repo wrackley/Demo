@@ -23,35 +23,17 @@
                                 //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
                                 var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
                                 app.controller('findLocalPetsCtrl', function($scope, $http, $resource) {
-				    $scope.pets = [];
+				   
                                     //this calls the API using GET, it passes in the Animal type, the zipcode the user wants to search and how many results to return
                                     function getAnimals(animal, zipCode, count) {
                                         //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
                                         var url = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&animal=" + animal + "&location=" + zipCode + "&count="+count+"&format=json&callback=JSON_CALLBACK";
                                         $http.jsonp(url)
-                                            .success(function(data) {
-                                                $scope.details = data.petfinder.pets.pet.length;
-                                                var index = data.petfinder.pets.pet.length;
-                                                //this parses through each record returned by the API and organizes them into an ordered list 
-                                                angular.forEach(data.petfinder.pets.pet, function(value, key) {
-                                                    //this parses through the list of breeds assigned to the individual listing and joins them if more than one breed is assigned to an individual pet
-                                                    var catBreed = "";
-                                                    angular.forEach(value.breeds, function(selectedBreed, key) {
-                                                        catBreed = catBreed + selectedBreed.$t + ", ";
-                                                    });
-                                                    var photoUrl = ""
-                                                    //this trys to find and parse the photo url for the individual pet listing, if no picure is found, the src is blanked and a placeholder is used
-                                                    try {
-                                                        if (value.media.photos.photo.length != 0) {
-                                                            photoUrl = value.media.photos.photo[0].$t;
-                                                        }
-                                                    } catch (err) {
-                                                        photoUrl = "";
-                                                    }
+                                            .success(function(data) {                                           
 
-                                                    //this creates the individual list item for each pet return from the search 
-							$scope.pets = data.petfinder.pets
-                                                    //$scope.pets.push({"Name: " :value.name.$t + "-" + value.animal.$t}, {"PhotoUrl": photoUrl},  {"Age": value.age.$t}, {"Shelter ID": value.id.$t}, {"Breed":  catBreed});
+                                                console.log(data.petfinder.pets);   
+						$scope.pets = data.petfinder.pets
+                                                    
                                                 });
                                                 //this wraps all the results in an ordered list as to have a number next to each item 
                                                 
@@ -59,7 +41,7 @@
                                             })
                                             //in case the API can't be reached for some reason or some unexpected error arises, the page returns an error code
                                             .error(function(data, status, headers, config) {                                                
-                                                $scope.searchResults = "<b>API Error</b>"
+                                                
                                             });
 
                                     }
