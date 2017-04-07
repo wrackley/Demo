@@ -19,17 +19,19 @@
                         <!-- Actual scripting logic for the Application -->
                             <script>
                                 //this declares the HTML to be pushed to the user after it is dynamically created 
-                                var pets = [];				
+                                				
                                 //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
                                 var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
                                 app.controller('findLocalPetsCtrl', function($scope, $http, $resource) {
 				    $scope.pets = [];
+				    var pets = [];
                                     //this calls the API using GET, it passes in the Animal type, the zipcode the user wants to search and how many results to return
                                     function getAnimals(animal, zipCode, count) {
                                         //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
                                         var url = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&animal=" + animal + "&location=" + zipCode + "&count="+count+"&format=json&callback=JSON_CALLBACK";
                                         $http.jsonp(url)
-                                            .success(function(data) {                                                 
+                                            .success(function(data) {
+						pets.concat(data.petfinder.pets.pet);
 						$scope.pets = data.petfinder.pets.pet;						
                                                 })                              
                                             //in case the API can't be reached for some reason or some unexpected error arises, the page returns an error code
