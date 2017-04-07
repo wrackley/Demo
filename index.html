@@ -46,7 +46,9 @@
                                             getAnimals("cat", $scope.inputData.zipCode, $scope.inputData.numCats);
                                             getAnimals("dog", $scope.inputData.zipCode, $scope.inputData.numDogs);
 					    console.log(pets);
+					    $scope.pets = pets;
 					    console.log($scope.pets);
+					    pets = [];
                                             console.log("Zip Code:" + $scope.inputData.zipCode);
                                         } else {
 											$scope.searchResults = "<b style='color: red;' >Error:Invalid Input Parameters</b>"
