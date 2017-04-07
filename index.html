@@ -40,7 +40,7 @@
 
                                     }
                                     $scope.findPets = function() {
-					pets = [];
+					
                                         if ($scope.findPetsForm.$valid) {                                            
                                             //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
                                             getAnimals("cat", $scope.inputData.zipCode, $scope.inputData.numCats);
