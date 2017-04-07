@@ -30,7 +30,7 @@
                                         var url = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&animal=" + animal + "&location=" + zipCode + "&count="+count+"&format=json&callback=JSON_CALLBACK";
                                         $http.jsonp(url)
                                             .success(function(data) {                                                 
-						return data.petfinder.pets.pet;						
+						pets = data.petfinder.pets.pet;						
                                                 })                              
                                             //in case the API can't be reached for some reason or some unexpected error arises, the page returns an error code
                                             .error(function(data, status, headers, config) {                                                
@@ -43,7 +43,7 @@
 					pets = [];
                                         if ($scope.findPetsForm.$valid) {                                            
                                             //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
-                                            pets = getAnimals("cat", $scope.inputData.zipCode, $scope.inputData.numCats);
+                                            getAnimals("cat", $scope.inputData.zipCode, $scope.inputData.numCats);
                                             getAnimals("dog", $scope.inputData.zipCode, $scope.inputData.numDogs);
 					    $scope.pets = pets;
 					    console.log(pets);
