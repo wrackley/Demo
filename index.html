@@ -92,7 +92,7 @@
 						<button ng-click="clearResults()">Clear Results</button>					
                     </form>
 					<!-- this is where the search results are pushed to the user -->
-			<div ng-model="searchResults"><ol><li ng-repeat="pet in pets">{{pet.name.$t}}</li></ol></div>
+			<div ng-model="searchResults"><ol><li ng-repeat="pet in pets">{{pet.name.$t}} - {{pet.animal.$t}}</li></ol></div>
                 </div>
             </body>
 
