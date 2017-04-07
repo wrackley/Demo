@@ -19,7 +19,7 @@
                         <!-- Actual scripting logic for the Application -->
                             <script>
                                 //this declares the HTML to be pushed to the user after it is dynamically created 
-                                var html = "";
+                                var pets = [];
                                 //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
                                 var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
                                 app.controller('findLocalPetsCtrl', function($scope, $http, $resource) {
@@ -49,10 +49,10 @@
                                                     }
 
                                                     //this creates the individual list item for each pet return from the search 
-                                                    html = html + "<li>Name: " + value.name.$t + "-" + value.animal.$t + "<ul style=list-style:none;>" + "<li><img src='" + photoUrl + "' alt='No Image'/></li>" + "<li>Age: " + value.age.$t + "<li>Shelter ID: " + value.id.$t + "</li>" + "<li>Breed: " + catBreed + "</li>" + "</ul>" + "</li>";
+                                                    pets.push("<li>Name: " + value.name.$t + "-" + value.animal.$t + "<ul style=list-style:none;>" + "<li><img src='" + photoUrl + "' alt='No Image'/></li>" + "<li>Age: " + value.age.$t + "<li>Shelter ID: " + value.id.$t + "</li>" + "<li>Breed: " + catBreed + "</li>" + "</ul>" + "</li>");
                                                 });
                                                 //this wraps all the results in an ordered list as to have a number next to each item 
-                                                $scope.searchResults = "<ol>" + html + "</ol>";
+                                                $scope.searchResults = pets;
 
                                             })
                                             //in case the API can't be reached for some reason or some unexpected error arises, the page returns an error code
@@ -106,7 +106,7 @@
 						<button ng-click="clearResults()">Clear Results</button>					
                     </form>
 					<!-- this is where the search results are pushed to the user -->
-                    <div ng-bind-html="searchResults"></div>
+			<div ng-model="searchResults"><ol ng-repeat="pet in pets">{{pet}}</ol></div>
                 </div>
             </body>
 
