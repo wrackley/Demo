@@ -29,6 +29,7 @@
 				    // Allow loading from our assets domain.  Notice the difference between * and **.
 				    'https://photos*.petfinder.com/photos/pets/**'
 				  ]);
+				});
                                 app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
 			            var pets = [];
 				    $scope.pets = [];				                                        
