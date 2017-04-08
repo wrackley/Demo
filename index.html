@@ -16,6 +16,7 @@
                                 list-style-type: none;
                             }
                         </style>
+		    <style src="list.css"></style>
                         <!-- Actual scripting logic for the Application -->
                             <script>
                                 //this declares the HTML to be pushed to the user after it is dynamically created 
@@ -88,7 +89,7 @@
 						<button ng-click="clearResults()">Clear Results</button>					
                     </form>
 					<!-- this is where the search results are pushed to the user -->
-			<div ng-model="searchResults"><ol><li ng-repeat="pet in pets | orderBy: 'name.$t'"><div>{{pet.name.$t}} - {{pet.animal.$t}}</div><img ng-src="{{pet.media.photos.photo[0].$t}}" /></li><ul></ul></ol></div>
+			<div ng-model="searchResults" class="ui horizontal list"><ol><li ng-repeat="pet in pets | orderBy: 'name.$t'"><div>{{pet.name.$t}} - {{pet.animal.$t}}</div><img ng-src="{{pet.media.photos.photo[0].$t}}" /></li><ul></ul></ol></div>
                 </div>
             </body>
 
