@@ -21,7 +21,9 @@
                                 //this declares the HTML to be pushed to the user after it is dynamically created 
                                 				
                                 //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
-                                var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
+                                var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource','$sce', function($sce) {
+    $sce.URL="http://photos.petfinder.com";
+ }]);
                                 app.controller('findLocalPetsCtrl', function($scope, $http, $resource) {
 			            var pets = [];
 				    $scope.pets = [];				                                        
