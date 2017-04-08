@@ -21,7 +21,7 @@
                                 //this declares the HTML to be pushed to the user after it is dynamically created 
                                 				
                                 //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
-                                var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource','$sce']);
+                                var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
 				app.config(function($sceDelegateProvider) {
 				  $sceDelegateProvider.resourceUrlWhitelist([
 				    // Allow same origin resource loads.
