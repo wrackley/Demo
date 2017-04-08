@@ -22,14 +22,9 @@
                                 				
                                 //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
                                 var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
-				app.config(function($sceDelegateProvider) {
-				  $sceDelegateProvider.resourceUrlWhitelist([					  
-				    // Allow same origin resource loads.
-				    'self',
-				    // Allow loading from our assets domain.  Notice the difference between * and **.
-				    '**'
-				  ]);
-				});
+				app.config(['$sceProvider', function($sceProvider) {
+    $sceProvider.enabled(false);
+}]);
                                 app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
 			            var pets = [];
 				    $scope.pets = [];				                                        
