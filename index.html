@@ -31,7 +31,7 @@
              //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
          function getAnimals(zipCode) {
          //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
-		 var petUrl = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&location=" + zipCode + "&count=" + count + "&format=json&callback=JSON_CALLBACK";
+		 var petUrl = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&location=" + zipCode + "&format=json&callback=JSON_CALLBACK";
 		 console.log("Url: " + url);
 		 $http({
 		 method: 'GET',
