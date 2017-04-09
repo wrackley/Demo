@@ -92,7 +92,7 @@
         </form>
         <!-- this is where the search results are pushed to the user -->
         
-            <div class="ui horizontal list">
+            <div class="ui massive horizontal list">
                 <div class="item" ng-repeat="pet in pets | orderBy: 'name.$t'">
                     <img class="ui avatar image" ng-src="{{pet.media.photos.photo[0].$t}}">
                     <div class="content">
