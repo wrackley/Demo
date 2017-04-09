@@ -97,6 +97,7 @@
                                 <span class="animal">{{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}</span>
                                 <br>
                                 <span class="breed" ng-show="pet.breeds.breed.length>0">Breed: </span>
+                                <div>{{angular.isArray(pet.breeds.breed)}}</div>
                                 <div class="ui label" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</div>
                             </div>
                             <div class="description">
@@ -106,6 +107,7 @@
                                 <p>ID: {{pet.id.$t}}</p>
                             </div>
                             <div class="extra content">
+                                <div></div>
                                 <div class="ui label"  ng-repeat="(k, option) in pet.options.option">{{option.$t}}</div>
                                 <a ng-href="mailto:{{pet.contact.email.$t}}">
                                     <br>                                    
