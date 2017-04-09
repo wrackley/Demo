@@ -95,7 +95,7 @@
             <div class="ui four column grid">
                 <div class="column" ng-repeat="pet in pets | orderBy: 'name.$t'">                    
                     <div class="ui segment">
-                        <img class="ui avatar image" ng-src="{{pet.media.photos.photo[0].$t}}">
+                        <img ng-src="{{pet.media.photos.photo[0].$t}}">
                         <div class="header">{{pet.name.$t}} - {{pet.animal.$t}}</div>
                         Top Contributor
                     </div>
