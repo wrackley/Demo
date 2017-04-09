@@ -97,8 +97,7 @@
                                 <span class="animal">{{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}</span>
                                 <br>
                                 <span class="breed" ng-show="pet.breeds.breed.length>0">Breed: </span>
-                                <span>{{pet.breeds.breed[0]}}</span>
-                                <div class="ui label" ng-repeat="(k, v) in pet.breeds.breed">{{v.$t}}</div>
+                                <div class="ui label" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</div>
                             </div>
                             <div class="description">
                                 <p>City: {{pet.contact.city.$t}}</p>
@@ -107,7 +106,7 @@
                                 <p>ID: {{pet.id.$t}}</p>
                             </div>
                             <div class="extra content">
-                                <div class="ui label"  ng-repeat="(k, v) in pet.options.option">{{v.$t}}</div>
+                                <div class="ui label"  ng-repeat="(k, option) in pet.options.option">{{option.$t}}</div>
                                 <a ng-href="mailto:{{pet.contact.email.$t}}">
                                     <br>                                    
                                     Email Contact
