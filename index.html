@@ -27,9 +27,9 @@
 
             $scope.showModal = false;
 
-            function getAnimals(zipCode, count) {
+            function getAnimals(zipCode) {
                 //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
-                var url = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&location=" + zipCode + "&count=" + count + "&format=json&callback=JSON_CALLBACK";
+                var url = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&location=" + zipCode + "&format=json&callback=JSON_CALLBACK";
                 console.log("Url: " + url);
                 $http.jsonp(url)
                     .success(function(data, showModal) {
@@ -49,7 +49,7 @@
             }
             $scope.findPets = function() {
                 //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
-                getAnimals($scope.inputData.zipCode, $scope.inputData.numCats);;
+                getAnimals($scope.inputData.zipCode);
                 console.log("Pets: " + pets);
                 console.log("Zip Code:" + $scope.inputData.zipCode);
 
@@ -73,9 +73,7 @@
         <!-- Declares the name of the form, will be used to validate entries in angularjs -->
 <nav class="navbar navbar-light bg-faded">
   <form class="form-inline">
-    <input class="form-control mr-sm-2" type="ZipCode" placeholder="Search" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
-	<input class="form-control mr-sm-2" type="Num Dogs" placeholder="Search" ng-model="inputData.numDogs" ng-pattern="/^[-+]?\d+$/" required>
-	<input class="form-control mr-sm-2" type="Num Cats" placeholder="Search" ng-model="inputData.numCats" ng-pattern="/^[-+]?\d+$/" required>
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
     <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
   </form>
 </nav>
