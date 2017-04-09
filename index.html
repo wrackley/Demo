@@ -108,6 +108,7 @@
                             </div>
                             <div class="extra content">
                                 <div></div>
+                                <div ng-show="angular.isArray(pet.options.option)">Test</div>
                                 <div class="ui label"  ng-repeat="(k, option) in pet.options.option">{{option.$t}}</div>
                                 <a ng-href="mailto:{{pet.contact.email.$t}}">
                                     <br>                                    
