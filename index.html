@@ -97,10 +97,12 @@
                     <div class="ui segment">
                         <div class="ui items">
                             <div class="item">
-                                <div class="content">
-                                    <div class="header">{{pet.name.$t}} - {{pet.animal.$t}}</div>
-                                    <img ng-src="{{pet.media.photos.photo[0].$t}}" alt="No Image Found">                        
-                                </div>
+                                <a class="ui small image">
+                                    <img ng-src="{{pet.media.photos.photo[0].$t}}" alt="No Image Found">
+                                </a>
+                                    <div class="content">
+                                        <div class="header">{{pet.name.$t}} - {{pet.animal.$t}}</div>                                                                
+                                    </div>
                             </div>
                         </div>
                     </div>
