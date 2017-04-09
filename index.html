@@ -45,7 +45,7 @@
 		 }).then(function successCallback(response) {
 	         console.log("success");
 		 console.log(response);
-	         $scope.pet = data.petfinder.pets.pet;
+	         $scope.pet = response.petfinder.pets.pet;
 		 }, function errorCallback(response) {
 		 console.log(response);
 		 });
