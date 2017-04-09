@@ -1,96 +1,107 @@
 <!Doctype html>
 <!-- Created by: Walter Rackley -->
-    <!-- Customer: HCS -->
-        <!-- Created On: 4/4/2017 -->
-            <html>
+<!-- Customer: HCS -->
+<!-- Created On: 4/4/2017 -->
+<html>
 
-            <head>
-                <title>Find Local Pets</title>
-                <!-- Brings in the required JS libs -->
-                    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-                    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-sanitize.min.js"></script>
-                    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
-                    <!-- Removes the bullet points for unordered lists, makes it neater -->
-                        <style>
-                            ul {
-                                list-style-type: none;
-                            }
-                        </style>
-		    <style src="list.css"></style>
-                        <!-- Actual scripting logic for the Application -->
-                            <script>
-                                //this declares the HTML to be pushed to the user after it is dynamically created 
-                                				
-                                //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
-                                var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
-				app.config(['$sceProvider', function($sceProvider) {
-    $sceProvider.enabled(false);
-}]);
-                                app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
-			            var pets = [];
-				    $scope.pets = [];				                                        
-                                    function getAnimals(animal, zipCode, count) {
-                                        //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
-                                        var url = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&animal=" + animal + "&location=" + zipCode + "&count="+count+"&format=json&callback=JSON_CALLBACK";
-                                        $http.jsonp(url)
-                                            .success(function(data) {
-						pets = pets.concat(data.petfinder.pets.pet);											
-                                                })                              
-                                            //in case the API can't be reached for some reason or some unexpected error arises, the page returns an error code
-                                            .error(function(data, status, headers, config) {                                                
-                                                
-                                            });
+<head>
+    <title>Find Local Pets</title>
+    <!-- Brings in the required JS libs -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+    <!-- Removes the bullet points for unordered lists, makes it neater -->
+    <style>
+        ul {
+            list-style-type: none;
+        }
+    </style>
+    <style src="list.css"></style>
+    <!-- Actual scripting logic for the Application -->
+    <script>
+        //this declares the HTML to be pushed to the user after it is dynamically created 
 
-                                    }
-                                    $scope.findPets = function() {
-					
-                                        if ($scope.findPetsForm.$valid) {                                            
-                                            //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
-                                            getAnimals("cat", $scope.inputData.zipCode, $scope.inputData.numCats);
-                                            getAnimals("dog", $scope.inputData.zipCode, $scope.inputData.numDogs);
-					    console.log(pets);
-					    $scope.pets = pets;
-					    console.log($scope.pets);
-					    pets = [];
-                                            console.log("Zip Code:" + $scope.inputData.zipCode);
-                                        } else {
-											$scope.searchResults = "<b style='color: red;' >Error:Invalid Input Parameters</b>"
-										}
-									}
-									$scope.clearResults = function() {
-										$scope.inputData.zipCode = "";
-										$scope.inputData.numDogs = "";
-										$scope.inputData.numCats= "";
-										$scope.searchResults="";
-										html = "";
-                                    }
+        //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
+        var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
+        app.config(['$sceProvider', function($sceProvider) {
+            $sceProvider.enabled(false);
+        }]);
+        app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
+            var pets = [];
+            $scope.pets = [];
 
-                                });
-                            </script>
-            </head>
-			<!-- Declares the name of the app -->
-            <body ng-app="findLocalPets">
-				<!-- declares the name of a controller to be used in angularjs code -->
-                <div ng-controller="findLocalPetsCtrl">
-					<!-- Declares the name of the form, will be used to validate entries in angularjs -->
-                    <form name="findPetsForm" validate>
-                        <h3>Find Local Pets</h3>
-                        Zip Code:<br>
-						<!-- ng-pattern will only allow for valid us or Canadian postal codes -->
-                        <input type="text" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
-						<br> Number of Dogs to Return(More than 2):<br>
-						<!-- requires user to enter a qty of dogs to return, numerical entries are rejected -->
-                        <input type="text" ng-model="inputData.numDogs" ng-pattern=" /^[-+]?\d+$/" required>
-						<br> Number of Cats to Return(More than 2):<br>
-						<!-- requires user to enter a number of cats to return, non numerical entries are rejected -->
-                        <input type="text" ng-model="inputData.numCats" ng-pattern=" /^[-+]?\d+$/" required><br>
-						<!-- the button the user will click to search for pets, attaches a clickEvent to call a function in the angularjs -->
-                        <button ng-click="findPets()">Click to Search for Pets</button>
-						<button ng-click="clearResults()">Clear Results</button>					
-                    </form>
-					<!-- this is where the search results are pushed to the user -->
-			<div ng-model="searchResults" class="ui horizontal list"><ol><li ng-repeat="pet in pets | orderBy: 'name.$t'"><div>{{pet.name.$t}} - {{pet.animal.$t}}</div><img ng-src="{{pet.media.photos.photo[0].$t}}" /></li><ul></ul></ol></div>
+            function getAnimals(animal, zipCode, count) {
+                //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
+                var url = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&animal=" + animal + "&location=" + zipCode + "&count=" + count + "&format=json&callback=JSON_CALLBACK";
+                $http.jsonp(url)
+                    .success(function(data) {
+                        pets = pets.concat(data.petfinder.pets.pet);
+                    })
+                    //in case the API can't be reached for some reason or some unexpected error arises, the page returns an error code
+                    .error(function(data, status, headers, config) {
+
+                    });
+
+            }
+            $scope.findPets = function() {
+
+                if ($scope.findPetsForm.$valid) {
+                    //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
+                    getAnimals("cat", $scope.inputData.zipCode, $scope.inputData.numCats);
+                    getAnimals("dog", $scope.inputData.zipCode, $scope.inputData.numDogs);
+                    console.log(pets);
+                    $scope.pets = pets;
+                    console.log($scope.pets);
+                    pets = [];
+                    console.log("Zip Code:" + $scope.inputData.zipCode);
+                } else {
+                    $scope.searchResults = "<b style='color: red;' >Error:Invalid Input Parameters</b>"
+                }
+            }
+            $scope.clearResults = function() {
+                $scope.inputData.zipCode = "";
+                $scope.inputData.numDogs = "";
+                $scope.inputData.numCats = "";
+                $scope.searchResults = "";
+                html = "";
+            }
+
+        });
+    </script>
+</head>
+<!-- Declares the name of the app -->
+
+<body ng-app="findLocalPets">
+    <!-- declares the name of a controller to be used in angularjs code -->
+    <div ng-controller="findLocalPetsCtrl">
+        <!-- Declares the name of the form, will be used to validate entries in angularjs -->
+        <form name="findPetsForm" validate>
+            <h3>Find Local Pets</h3>
+            Zip Code:<br>
+            <!-- ng-pattern will only allow for valid us or Canadian postal codes -->
+            <input type="text" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
+            <br> Number of Dogs to Return(More than 2):<br>
+            <!-- requires user to enter a qty of dogs to return, numerical entries are rejected -->
+            <input type="text" ng-model="inputData.numDogs" ng-pattern=" /^[-+]?\d+$/" required>
+            <br> Number of Cats to Return(More than 2):<br>
+            <!-- requires user to enter a number of cats to return, non numerical entries are rejected -->
+            <input type="text" ng-model="inputData.numCats" ng-pattern=" /^[-+]?\d+$/" required><br>
+            <!-- the button the user will click to search for pets, attaches a clickEvent to call a function in the angularjs -->
+            <button ng-click="findPets()">Click to Search for Pets</button>
+            <button ng-click="clearResults()">Clear Results</button>
+        </form>
+        <!-- this is where the search results are pushed to the user -->
+        
+            <div class="ui horizontal list">
+                <div class="item" ng-repeat="pet in pets | orderBy: 'name.$t'">
+                    <img class="ui avatar image" ng-src="{{pet.media.photos.photo[0].$t}}">
+                    <div class="content">
+                        <div class="header">{{pet.name.$t}} - {{pet.animal.$t}}</div>
+                        Top Contributor
+                    </div>
                 </div>
-            </body>
+            </div>
+        </div>
+</body>
 
-            </html>
+</html>
