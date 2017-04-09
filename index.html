@@ -95,22 +95,26 @@
             <div class="ui link cards">
                 <div class="card" ng-repeat="pet in pets | orderBy: 'name.$t'">                      
                     <div class="image">
-                        <img ng-src="{{pet.media.photos.photo[2].$t}}" alt="No Image Found">
+                        <img ng-src="{{pet.media.photos.photo[3].$t}}" alt="No Image Found">
                     </div>
                         <div class="content">
                             <a class="header">{{pet.name.$t}}</a>
                             <div class="meta">
-                                <span class="animal">{{pet.sex.$t="M"?"Male":"Female"}}: {{pet.animal.$t}}</span>
-                                <span class="breed" ng-repeat="breed in pet.breeds.breed">{{breed.$t}}</span>
+                                <span class="animal">{{pet.sex.$t="M"?"Male":"Female"}} {{pet.animal.$t}}</span>
+                                <br>
+                                <span class="breed" ng-repeat="breed in pet.breeds.breed">Breed: {{breed.$t}}</span>
                             </div>
                             <div class="description">
                                 <p>City: {{pet.contact.city.$t}}</p>
                                 <p>State: {{pet.contact.state.$t}}</p>
                                 <p>Zip: {{pet.contact.zip.$t}}</p>
-                                <p>Email: mailto:{{pet.contact.email.$t}}</p>
                             </div>
                             <div class="extra content">
                                 <div class="ui label"  ng-repeat="option in pet.options.option">{{option.$t}}</div>
+                                <a ng-href="mailto:{{pet.contact.email.$t}}">
+                                    <i class="mail icon"></i>
+                                    Email Contact
+                                </a>
                             </div>
                         </div>
                 </div>
