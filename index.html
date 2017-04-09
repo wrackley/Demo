@@ -12,8 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-touch.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-touch.min.js"></script>
-    <link rel="stylesheet" href="ui-bootstrap-tpls-2.5.0.min.js">
+    <script src="ui-bootstrap-tpls-2.5.0.min.js"></script>
     <!-- Actual scripting logic for the Application -->
     <script>
         //this declares the HTML to be pushed to the user after it is dynamically created 
@@ -71,19 +70,14 @@
     <!-- declares the name of a controller to be used in angularjs code -->
     <div ng-controller="findLocalPetsCtrl">
         <!-- Declares the name of the form, will be used to validate entries in angularjs -->
-        <div class="ui menu">
-            <div class="item">
-                <div class="ui action input">
-                    <span class="item">Zip Code: </span>
-                    <input type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
-                    <span class="item">Number of Dogs</span>
-                    <input type="text" placeholder="Number of Dogs" ng-model="inputData.numDogs" ng-pattern=" /^[-+]?\d+$/">
-                    <span class="item">Number of Cats</span>
-                    <input type="text" placeholder="Number of Cats" ng-model="inputData.numCats" ng-pattern=" /^[-+]?\d+$/" required>
-                    <div class="ui button" ng-click="findPets()">Search</div>
-                </div>
-            </div>
-        </div>
+<nav class="navbar navbar-light bg-faded">
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="ZipCode" placeholder="Search" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
+	<input class="form-control mr-sm-2" type="Num Dogs" placeholder="Search" ng-model="inputData.numDogs" ng-pattern="/^[-+]?\d+$/" required>
+	<input class="form-control mr-sm-2" type="Num Cats" placeholder="Search" ng-model="inputData.numCats" ng-pattern="/^[-+]?\d+$/" required>
+    <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
+  </form>
+</nav>
         <!-- this is where the search results are pushed to the user -->
 
 <div class="card-deck">
