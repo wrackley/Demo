@@ -97,6 +97,7 @@
                                 <span class="animal">{{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}</span>
                                 <br>
                                 <span class="breed" ng-show="pet.breeds.breed.length>0">Breed: </span>
+                                <span>{{pet.breeds.breed[0]}}</span>
                                 <div class="ui label" ng-repeat="breed in pet.breeds.breed">{{breed.$t}}</div>
                             </div>
                             <div class="description">
