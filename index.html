@@ -12,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-touch.min.js"></script>
-     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="ui-bootstrap-tpls-2.5.0.min.js"></script>
     <!-- Actual scripting logic for the Application -->
     <script>
@@ -27,22 +27,17 @@
 
             $scope.showModal = false;
 
-            function getAnimals(zipCode) {
-                //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
-                var url = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&location=" + zipCode + "&format=json&callback=JSON_CALLBACK";
-                console.log("Url: " + url);
-                $http.jsonp(url)
-                    .success(function(data, showModal) {
-                        $scope.pets = [];
-                        $scope.pets = data.petfinder.pets.pet;
-                        console.log("data: " + data + showModal);
-                    })
-                    //in case the API can't be reached for some reason or some unexpected error arises, the page returns an error code
-                    .error(function(data, status, headers, config) {
-
-                    });
-
-            }
+            //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
+            var petUrl = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&location=" + zipCode + "&count=" + count + "&format=json&callback=JSON_CALLBACK";
+            console.log("Url: " + url);
+            $http({
+                method: 'GET',
+                url: petUrl
+            }).then(function successCallback(response) {
+                console.log(response);
+            }, function errorCallback(response) {
+                console.log(response);
+            });
             $scope.cardClicked = function(name) {
                 console.log("Card Clicked" + name);
                 $scope.showModal = !$scope.showModal;
@@ -71,42 +66,42 @@
     <!-- declares the name of a controller to be used in angularjs code -->
     <div ng-controller="findLocalPetsCtrl">
         <!-- Declares the name of the form, will be used to validate entries in angularjs -->
-<nav class="navbar navbar-light bg-faded">
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
-    <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
-  </form>
-</nav>
+        <nav class="navbar navbar-light bg-faded">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
+                <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
+            </form>
+        </nav>
         <!-- this is where the search results are pushed to the user -->
 
-<div class="card-deck">
-    <div class="card" ng-click="cardClicked(pet.id.$t, showModal)" ng-repeat="pet in pets | orderBy: 'name.$t'">
-        <img class="card-img-top" ng-src="{{pet.media.photos.photo[3].$t}}" alt="Card image cap">
-        <div class="card-block">
-            <h4 class="card-title">{{pet.name.$t}}</h4>
-            <p class="card-text">
-                <small class="text-muted">
+        <div class="card-deck">
+            <div class="card" ng-click="cardClicked(pet.id.$t, showModal)" ng-repeat="pet in pets | orderBy: 'name.$t'">
+                <img class="card-img-top" ng-src="{{pet.media.photos.photo[3].$t}}" alt="Card image cap">
+                <div class="card-block">
+                    <h4 class="card-title">{{pet.name.$t}}</h4>
+                    <p class="card-text">
+                        <small class="text-muted">
 			<p>{{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}</p>
 			<br>
 			<p><span class="label label-default" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</span>
 			<span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span></p>
 		</small>
-            </p>
-            <div class="card-text">
-                <p>City: {{pet.contact.city.$t}}</p>
-                <p>State: {{pet.contact.state.$t}}</p>
-                <p>Zip: {{pet.contact.zip.$t}}</p>
-                <p>ID: {{pet.id.$t}}</p>
-            </div>
-            <p class="card-text">
-                <small class="text-muted">
+                    </p>
+                    <div class="card-text">
+                        <p>City: {{pet.contact.city.$t}}</p>
+                        <p>State: {{pet.contact.state.$t}}</p>
+                        <p>Zip: {{pet.contact.zip.$t}}</p>
+                        <p>ID: {{pet.id.$t}}</p>
+                    </div>
+                    <p class="card-text">
+                        <small class="text-muted">
 		<span class="label label-default" ng-repeat="(k, option) in pet.options.option">{{option.$t}}</span>
 		<a ng-href="mailto:{{pet.contact.email.$t}}">Email Contact</a>
 	  </small>
-            </p>
+                    </p>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
     </div>
 </body>
