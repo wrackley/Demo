@@ -35,10 +35,10 @@
                 var url = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&location=" + zipCode + "&count=" + count + "&format=json&callback=JSON_CALLBACK";
                 console.log("Url: " + url);
                 $http.jsonp(url)
-                    .success(function(data) {
+                    .success(function(data, showModal) {
                         $scope.pets = [];
                         $scope.pets = data.petfinder.pets.pet;
-                        console.log("data: " + data);
+                        console.log("data: " + data + showModal);
                     })
                     //in case the API can't be reached for some reason or some unexpected error arises, the page returns an error code
                     .error(function(data, status, headers, config) {
@@ -90,7 +90,7 @@
         <!-- this is where the search results are pushed to the user -->
 
         <div class="ui link cards">
-            <div ng-click="cardClicked(pet.id.$t)" class="card" ng-repeat="pet in pets | orderBy: 'name.$t'">
+            <div ng-click="cardClicked(pet.id.$t, showModal)" class="card" ng-repeat="pet in pets | orderBy: 'name.$t'">
                 <div class="image">
                     <img ng-src="{{pet.media.photos.photo[3].$t}}" alt="No Image Found">
                 </div>
