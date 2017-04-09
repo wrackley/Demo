@@ -95,9 +95,13 @@
             <div class="ui four column grid">
                 <div class="column" ng-repeat="pet in pets | orderBy: 'name.$t'">                    
                     <div class="ui segment">
-                        <div class="content">
-                            <div class="header">{{pet.name.$t}} - {{pet.animal.$t}}</div>
-                            <img ng-src="{{pet.media.photos.photo[0].$t}}" alt="No Image Found">                        
+                        <div class="ui items">
+                            <div class="item">
+                                <div class="content">
+                                    <div class="header">{{pet.name.$t}} - {{pet.animal.$t}}</div>
+                                    <img ng-src="{{pet.media.photos.photo[0].$t}}" alt="No Image Found">                        
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
