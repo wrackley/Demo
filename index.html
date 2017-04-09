@@ -1,109 +1,110 @@
+
+
 <!Doctype html>
 <!-- Created by: Walter Rackley -->
 <!-- Customer: HCS -->
 <!-- Created On: 4/4/2017 -->
 <html>
-
-<head>
-    <title>Find Local Pets</title>
-    <!-- Brings in the required JS libs -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-touch.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="ui-bootstrap-tpls-2.5.0.min.js"></script>
-    <!-- Actual scripting logic for the Application -->
-    <script>
-        //this declares the HTML to be pushed to the user after it is dynamically created 
-        var pets;
-        //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
-        var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
-        app.config(['$sceProvider', function($sceProvider) {
-            $sceProvider.enabled(false);
-        }]);
-        app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
-
-            $scope.showModal = false;
-
-            //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
-            var petUrl = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&location=" + zipCode + "&count=" + count + "&format=json&callback=JSON_CALLBACK";
-            console.log("Url: " + url);
-            $http({
-                method: 'GET',
-                url: petUrl
-            }).then(function successCallback(response) {
-                console.log(response);
-            }, function errorCallback(response) {
-                console.log(response);
-            });
-            $scope.cardClicked = function(name) {
-                console.log("Card Clicked" + name);
-                $scope.showModal = !$scope.showModal;
-            }
-            $scope.findPets = function() {
-                //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
-                getAnimals($scope.inputData.zipCode);
-                console.log("Pets: " + pets);
-                console.log("Zip Code:" + $scope.inputData.zipCode);
-
-            }
-            $scope.clearResults = function() {
-                $scope.inputData.zipCode = "";
-                $scope.inputData.numDogs = "";
-                $scope.inputData.numCats = "";
-                $scope.searchResults = "";
-                html = "";
-            }
-
-        });
-    </script>
-</head>
-<!-- Declares the name of the app -->
-
-<body ng-app="findLocalPets">
-    <!-- declares the name of a controller to be used in angularjs code -->
-    <div ng-controller="findLocalPetsCtrl">
-        <!-- Declares the name of the form, will be used to validate entries in angularjs -->
-        <nav class="navbar navbar-light bg-faded">
+   <head>
+      <title>Find Local Pets</title>
+      <!-- Brings in the required JS libs -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-touch.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="ui-bootstrap-tpls-2.5.0.min.js"></script>
+      <!-- Actual scripting logic for the Application -->
+      <script>
+         //this declares the HTML to be pushed to the user after it is dynamically created 
+         var pets;
+         //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
+         var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
+         app.config(['$sceProvider', function($sceProvider) {
+             $sceProvider.enabled(false);
+         }]);
+         app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
+         
+             $scope.showModal = false;
+         
+             //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
+         function getAnimals(zipCode) {
+         //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
+		 var petUrl = "https://api.petfinder.com/pet.find?key=7310a3202957b2aa5d90e0b18d9c4ce2&location=" + zipCode + "&count=" + count + "&format=json&callback=JSON_CALLBACK";
+		 console.log("Url: " + url);
+		 $http({
+		 method: 'GET',
+		 url: petUrl
+		 }).then(function successCallback(response) {
+		 console.log(response);
+		 }, function errorCallback(response) {
+		 console.log(response);
+		 });
+         }
+             $scope.cardClicked = function(name) {
+                 console.log("Card Clicked" + name);
+                 $scope.showModal = !$scope.showModal;
+             }
+             $scope.findPets = function() {
+                 //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
+                 getAnimals($scope.inputData.zipCode);
+                 console.log("Pets: " + pets);
+                 console.log("Zip Code:" + $scope.inputData.zipCode);
+         
+             }
+             $scope.clearResults = function() {
+                 $scope.inputData.zipCode = "";
+                 $scope.inputData.numDogs = "";
+                 $scope.inputData.numCats = "";
+                 $scope.searchResults = "";
+                 html = "";
+             }
+         
+         });
+      </script>
+   </head>
+   <!-- Declares the name of the app -->
+   <body ng-app="findLocalPets">
+      <!-- declares the name of a controller to be used in angularjs code -->
+      <div ng-controller="findLocalPetsCtrl">
+         <!-- Declares the name of the form, will be used to validate entries in angularjs -->
+         <nav class="navbar navbar-light bg-faded">
             <form class="form-inline">
-                <input class="form-control mr-sm-2" type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
-                <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
+               <input class="form-control mr-sm-2" type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
+               <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
             </form>
-        </nav>
-        <!-- this is where the search results are pushed to the user -->
-
-        <div class="card-deck">
+         </nav>
+         <!-- this is where the search results are pushed to the user -->
+         <div class="card-deck">
             <div class="card" ng-click="cardClicked(pet.id.$t, showModal)" ng-repeat="pet in pets | orderBy: 'name.$t'">
-                <img class="card-img-top" ng-src="{{pet.media.photos.photo[3].$t}}" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title">{{pet.name.$t}}</h4>
-                    <p class="card-text">
-                        <small class="text-muted">
-			<p>{{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}</p>
-			<br>
-			<p><span class="label label-default" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</span>
-			<span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span></p>
-		</small>
-                    </p>
-                    <div class="card-text">
-                        <p>City: {{pet.contact.city.$t}}</p>
-                        <p>State: {{pet.contact.state.$t}}</p>
-                        <p>Zip: {{pet.contact.zip.$t}}</p>
-                        <p>ID: {{pet.id.$t}}</p>
-                    </div>
-                    <p class="card-text">
-                        <small class="text-muted">
-		<span class="label label-default" ng-repeat="(k, option) in pet.options.option">{{option.$t}}</span>
-		<a ng-href="mailto:{{pet.contact.email.$t}}">Email Contact</a>
-	  </small>
-                    </p>
-                </div>
+               <img class="card-img-top" ng-src="{{pet.media.photos.photo[3].$t}}" alt="Card image cap">
+               <div class="card-block">
+                  <h4 class="card-title">{{pet.name.$t}}</h4>
+                  <p class="card-text">
+                     <small class="text-muted">
+                  <p>{{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}</p>
+                  <br>
+                  <p><span class="label label-default" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</span>
+                  <span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span></p>
+                  </small>
+                  </p>
+                  <div class="card-text">
+                     <p>City: {{pet.contact.city.$t}}</p>
+                     <p>State: {{pet.contact.state.$t}}</p>
+                     <p>Zip: {{pet.contact.zip.$t}}</p>
+                     <p>ID: {{pet.id.$t}}</p>
+                  </div>
+                  <p class="card-text">
+                     <small class="text-muted">
+                     <span class="label label-default" ng-repeat="(k, option) in pet.options.option">{{option.$t}}</span>
+                     <a ng-href="mailto:{{pet.contact.email.$t}}">Email Contact</a>
+                     </small>
+                  </p>
+               </div>
             </div>
-        </div>
-
-    </div>
-</body>
-
+         </div>
+      </div>
+   </body>
 </html>
+
