@@ -88,7 +88,7 @@
         <!-- this is where the search results are pushed to the user -->
         
             <div class="ui link cards">
-                <div onClick="cardClicked()" class="card" ng-repeat="pet in pets | orderBy: 'name.$t'">                      
+                <div ng-click="cardClicked()" class="card" ng-repeat="pet in pets | orderBy: 'name.$t'">                      
                     <div class="image">
                         <img ng-src="{{pet.media.photos.photo[3].$t}}" alt="No Image Found">
                     </div>
