@@ -74,16 +74,19 @@
         <div class="ui menu">
             <div class="item">
                 <div class="ui action input">
+                    <span class="item">Zip Code: </span>
                     <input type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>                    
                 </div>
             <div class="item">
                 <div class="ui action input">
+                    <span class="item">Number of Dogs</span>
                     <input type="text" placeholder="Number of Dogs" ng-model="inputData.numDogs" ng-pattern=" /^[-+]?\d+$/">
                 </div>
             </div>
             <div class="item">
                 <div class="ui action input">
-                    <input type="text" placeholder="Zip Code" ng-model="inputData.numCats" ng-pattern=" /^[-+]?\d+$/" required>
+                    <span class="item">Number of Cats</span>
+                    <input type="text" placeholder="Number of Cats" ng-model="inputData.numCats" ng-pattern=" /^[-+]?\d+$/" required>
                     <div class="ui button" ng-click="findPets()">Search</div>
                 </div>
             </div>
