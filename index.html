@@ -101,7 +101,16 @@
                                     <img ng-src="{{pet.media.photos.photo[0].$t}}" alt="No Image Found">
                                 </a>
                                     <div class="content">
-                                        <div class="header">{{pet.name.$t}} - {{pet.animal.$t}}</div>                                                                
+                                        <a class="header">{{pet.name.$t}}</a>
+                                        <div class="meta">
+                                            <span class="animal">{{pet.animal.$t}}</span>
+                                        </div>
+                                        <div class="description">
+                                            <p>{{pet.description.$t}}</p>
+                                        </div>
+                                        <div class="extra" ng-repeat="option in pet.options.option">
+                                            <div class="ui label">{{option.$t}}</div>
+                                        </div>
                                     </div>
                             </div>
                         </div>
