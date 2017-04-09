@@ -41,9 +41,10 @@
 			format: 'jsonp',
             		zip: zipCode,
             		callback: 'JSON_CALLBACK'
+		 	}
 		 }).then(function successCallback(response) {
 		 console.log(response);
-		 }, function errorCallback(response) {
+		 }), function errorCallback(response) {
 		 console.log(response);
 		 });
          }
