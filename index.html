@@ -52,7 +52,7 @@
                 console.log($scope.pets);
                 pets = [];
                 console.log("Zip Code:" + $scope.inputData.zipCode);
-                console.log($scope.option);
+                console.log(angular.element('#options').val());
 
             }
             $scope.clearResults = function() {
@@ -108,7 +108,7 @@
                             </div>
                             <div class="extra content">
                                 <div></div>
-                                <div ng-model="option">{{pet.options.option}}</div>
+                                <div id="options" ng-model="option">{{pet.options.option}}</div>
                                 <div class="ui label"  ng-repeat="(k, option) in pet.options.option">{{option.$t}}</div>
                                 <a ng-href="mailto:{{pet.contact.email.$t}}">
                                     <br>                                    
