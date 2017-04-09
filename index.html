@@ -52,7 +52,6 @@
                 console.log($scope.pets);
                 pets = [];
                 console.log("Zip Code:" + $scope.inputData.zipCode);
-                console.log(angular.element('#options').val());
 
             }
             $scope.clearResults = function() {
@@ -98,7 +97,7 @@
                                 <span class="animal">{{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}</span>
                                 <br>
                                 <span class="breed" ng-show="pet.breeds.breed.length>0">Breed: </span>
-                                <div id="options" ng-model="option">{{pet.breeds.breed}}</div>
+                                <div id="options" ng-init="console.log(pet.breeds.breed)" ng-model="option">{{pet.breeds.breed}}</div>
                                 <div class="ui label" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</div>
                             </div>
                             <div class="description">
@@ -109,7 +108,6 @@
                             </div>
                             <div class="extra content">
                                 <div></div>
-                                <div id="options" ng-model="option">{{pet.options.option}}</div>
                                 <div class="ui label"  ng-repeat="(k, option) in pet.options.option">{{option.$t}}</div>
                                 <a ng-href="mailto:{{pet.contact.email.$t}}">
                                     <br>                                    
