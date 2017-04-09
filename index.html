@@ -48,7 +48,7 @@
             }
             $scope.cardClicked = function(name) {
                 console.log("Card Clicked" + name);
-                $scope.showModal = true;
+                $scope.showModal = !$scope.showModal;
             }
             $scope.findPets = function() {
                 //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
@@ -90,7 +90,7 @@
         <!-- this is where the search results are pushed to the user -->
 
         <div class="ui link cards">
-            <div ng-click="cardClicked(pet.name.$t)" class="card" ng-repeat="pet in pets | orderBy: 'name.$t'">
+            <div ng-click="cardClicked(pet.id.$t)" class="card" ng-repeat="pet in pets | orderBy: 'name.$t'">
                 <div class="image">
                     <img ng-src="{{pet.media.photos.photo[3].$t}}" alt="No Image Found">
                 </div>
