@@ -95,7 +95,7 @@
                                 <span class="animal">{{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}</span>
                                 <br>
                                 <span class="breed">Breed: </span>
-                                <div class="ui label" ng-hide="(angular.isArray(pet.breeds.breed))||(pet.breeds.breed==true)">{{pet.breeds.breed.$t}}</div>
+                                <div class="ui label" ng-show="!(angular.isArray(pet.breeds.breed))">{{pet.breeds.breed.$t}}</div>
                                 <div class="ui label" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</div>
                             </div>
                             <div class="description">
