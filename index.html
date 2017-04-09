@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-touch.min.js"></script>
+     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="ui-bootstrap-tpls-2.5.0.min.js"></script>
     <!-- Actual scripting logic for the Application -->
     <script>
@@ -82,7 +83,7 @@
 
 <div class="card-deck">
     <div class="card" ng-click="cardClicked(pet.id.$t, showModal)" ng-repeat="pet in pets | orderBy: 'name.$t'">
-        <img class="card-img-top" src="{{pet.media.photos.photo[3].$t}}" alt="Card image cap">
+        <img class="card-img-top" ng-src="{{pet.media.photos.photo[3].$t}}" alt="Card image cap">
         <div class="card-block">
             <h4 class="card-title">{{pet.name.$t}}</h4>
             <p class="card-text">
