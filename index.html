@@ -75,21 +75,13 @@
             <div class="item">
                 <div class="ui action input">
                     <span class="item">Zip Code: </span>
-                    <input type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>                    
-                </div>
-            <div class="item">
-                <div class="ui action input">
+                    <input type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
                     <span class="item">Number of Dogs</span>
                     <input type="text" placeholder="Number of Dogs" ng-model="inputData.numDogs" ng-pattern=" /^[-+]?\d+$/">
-                </div>
-            </div>
-            <div class="item">
-                <div class="ui action input">
                     <span class="item">Number of Cats</span>
                     <input type="text" placeholder="Number of Cats" ng-model="inputData.numCats" ng-pattern=" /^[-+]?\d+$/" required>
                     <div class="ui button" ng-click="findPets()">Search</div>
                 </div>
-            </div>
         </div>
             </div>
         <!-- this is where the search results are pushed to the user -->
@@ -104,7 +96,9 @@
                             <div class="meta">
                                 <span class="animal">{{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}</span>
                                 <br>
-                                <span class="breed" ng-repeat="breed in pet.breeds.breed">Breed: {{breed.$t}}</span>
+                                <span class="breed">Breed: </span>
+                                <br>
+                                <div class="ui label" ng-repeat="breed in pet.breeds.breed">{{breed.$t}}</div>
                             </div>
                             <div class="description">
                                 <p>City: {{pet.contact.city.$t}}</p>
