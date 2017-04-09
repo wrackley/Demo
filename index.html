@@ -28,6 +28,7 @@
         }]);
         app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
 
+            $scope.showModal = false;
 
             function getAnimals(zipCode, count) {
                 //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
@@ -35,20 +36,21 @@
                 console.log("Url: " + url);
                 $http.jsonp(url)
                     .success(function(data) {
-                    $scope.pets = [];
-                    $scope.pets = data.petfinder.pets.pet;
-                    console.log("data: " + data);
-                })
+                        $scope.pets = [];
+                        $scope.pets = data.petfinder.pets.pet;
+                        console.log("data: " + data);
+                    })
                     //in case the API can't be reached for some reason or some unexpected error arises, the page returns an error code
                     .error(function(data, status, headers, config) {
 
-                });
+                    });
 
             }
             $scope.cardClicked = function() {
-                comsole.log("Card Clicked");
+                console.log("Card Clicked");
+                showModal = true;
             }
-            $scope.findPets = function() {    
+            $scope.findPets = function() {
                 //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
                 getAnimals($scope.inputData.zipCode, $scope.inputData.numCats);;
                 console.log("Pets: " + pets);
@@ -83,41 +85,56 @@
                     <input type="text" placeholder="Number of Cats" ng-model="inputData.numCats" ng-pattern=" /^[-+]?\d+$/" required>
                     <div class="ui button" ng-click="findPets()">Search</div>
                 </div>
-        </div>
             </div>
+        </div>
         <!-- this is where the search results are pushed to the user -->
-        
-            <div class="ui link cards">
-                <div ng-click="cardClicked()" class="card" ng-repeat="pet in pets | orderBy: 'name.$t'">                      
-                    <div class="image">
-                        <img ng-src="{{pet.media.photos.photo[3].$t}}" alt="No Image Found">
+
+        <div class="ui link cards">
+            <div ng-click="cardClicked()" class="card" ng-repeat="pet in pets | orderBy: 'name.$t'">
+                <div class="image">
+                    <img ng-src="{{pet.media.photos.photo[3].$t}}" alt="No Image Found">
+                </div>
+                <div class="content">
+                    <a class="header">{{pet.name.$t}}</a>
+                    <div class="meta">
+                        <span class="animal">{{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}</span>
+                        <br>
+                        <span class="breed">Breed: </span>
+                        <div class="ui label" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</div>
+                        <div class="ui label" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</div>
                     </div>
-                        <div class="content">
-                            <a class="header">{{pet.name.$t}}</a>
-                            <div class="meta">
-                                <span class="animal">{{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}</span>
-                                <br>
-                                <span class="breed">Breed: </span>   
-                                <div class="ui label" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</div>
-                                <div class="ui label" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</div>
-                            </div>
-                            <div class="description">
-                                <p>City: {{pet.contact.city.$t}}</p>
-                                <p>State: {{pet.contact.state.$t}}</p>
-                                <p>Zip: {{pet.contact.zip.$t}}</p>
-                                <p>ID: {{pet.id.$t}}</p>
-                            </div>
-                            <div class="extra content">
-                                <div class="ui label"  ng-repeat="(k, option) in pet.options.option">{{option.$t}}</div>
-                                <a ng-href="mailto:{{pet.contact.email.$t}}">
-                                    <br>                                    
-                                    Email Contact
-                                </a>
-                            </div>
-                        </div>
+                    <div class="description">
+                        <p>City: {{pet.contact.city.$t}}</p>
+                        <p>State: {{pet.contact.state.$t}}</p>
+                        <p>Zip: {{pet.contact.zip.$t}}</p>
+                        <p>ID: {{pet.id.$t}}</p>
+                    </div>
+                    <div class="extra content">
+                        <div class="ui label" ng-repeat="(k, option) in pet.options.option">{{option.$t}}</div>
+                        <a ng-href="mailto:{{pet.contact.email.$t}}">
+                            <br> Email Contact
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>      
+        </div>
+        <div ng-show="showModal" class="ui modal">
+            <i class="close icon"></i>
+            <div class="header">
+                Profile Picture
+            </div>
+            <div class="image content">
+                <div class="ui medium image">
+                    <img src="https://semantic-ui.com/images/avatar2/large/rachel.png">
+                </div>
+                <div class="description">
+                    <div class="ui header">We've auto-chosen a profile image for you.</div>
+                    <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+                    <p>Is it okay to use this photo?</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
