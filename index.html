@@ -43,20 +43,16 @@
                     });
 
             }
-            $scope.findPets = function() {
+            $scope.findPets = function() {    
+                //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
+                getAnimals("cat", $scope.inputData.zipCode, $scope.inputData.numCats);
+                getAnimals("dog", $scope.inputData.zipCode, $scope.inputData.numDogs);
+                console.log(pets);
+                $scope.pets = pets;
+                console.log($scope.pets);
+                pets = [];
+                console.log("Zip Code:" + $scope.inputData.zipCode);
 
-                if ($scope.findPetsForm.$valid) {
-                    //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
-                    getAnimals("cat", $scope.inputData.zipCode, $scope.inputData.numCats);
-                    getAnimals("dog", $scope.inputData.zipCode, $scope.inputData.numDogs);
-                    console.log(pets);
-                    $scope.pets = pets;
-                    console.log($scope.pets);
-                    pets = [];
-                    console.log("Zip Code:" + $scope.inputData.zipCode);
-                } else {
-                    $scope.searchResults = "<b style='color: red;' >Error:Invalid Input Parameters</b>"
-                }
             }
             $scope.clearResults = function() {
                 $scope.inputData.zipCode = "";
@@ -75,21 +71,24 @@
     <!-- declares the name of a controller to be used in angularjs code -->
     <div ng-controller="findLocalPetsCtrl">
         <!-- Declares the name of the form, will be used to validate entries in angularjs -->
-        <form name="findPetsForm" validate>
-            <h3>Find Local Pets</h3>
-            Zip Code:<br>
-            <!-- ng-pattern will only allow for valid us or Canadian postal codes -->
-            <input type="text" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
-            <br> Number of Dogs to Return(More than 2):<br>
-            <!-- requires user to enter a qty of dogs to return, numerical entries are rejected -->
-            <input type="text" ng-model="inputData.numDogs" ng-pattern=" /^[-+]?\d+$/" required>
-            <br> Number of Cats to Return(More than 2):<br>
-            <!-- requires user to enter a number of cats to return, non numerical entries are rejected -->
-            <input type="text" ng-model="inputData.numCats" ng-pattern=" /^[-+]?\d+$/" required><br>
-            <!-- the button the user will click to search for pets, attaches a clickEvent to call a function in the angularjs -->
-            <button ng-click="findPets()">Click to Search for Pets</button>
-            <button ng-click="clearResults()">Clear Results</button>
-        </form>
+        <div class="ui menu">
+            <div class="item">
+                <div class="ui action input">
+                    <input type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>                    
+                </div>
+            <div class="item">
+                <div class="ui action input">
+                    <input type="text" placeholder="Number of Dogs" ng-model="inputData.numDogs" ng-pattern=" /^[-+]?\d+$/">
+                </div>
+            </div>
+            <div class="item">
+                <div class="ui action input">
+                    <input type="text" placeholder="Zip Code" ng-model="inputData.numCats" ng-pattern=" /^[-+]?\d+$/" required>
+                    <div class="ui button" ng-click="findPets()">Search</div>
+                </div>
+            </div>
+        </div>
+            </div>
         <!-- this is where the search results are pushed to the user -->
         
             <div class="ui link cards">
