@@ -45,6 +45,9 @@
                 });
 
             }
+            $scope.cardClicked = function() {
+                comsole.log("Card Clicked");
+            }
             $scope.findPets = function() {    
                 //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
                 getAnimals($scope.inputData.zipCode, $scope.inputData.numCats);;
@@ -85,7 +88,7 @@
         <!-- this is where the search results are pushed to the user -->
         
             <div class="ui link cards">
-                <div class="card" ng-repeat="pet in pets | orderBy: 'name.$t'">                      
+                <div onClick="cardClicked()" class="card" ng-repeat="pet in pets | orderBy: 'name.$t'">                      
                     <div class="image">
                         <img ng-src="{{pet.media.photos.photo[3].$t}}" alt="No Image Found">
                     </div>
@@ -94,10 +97,8 @@
                             <div class="meta">
                                 <span class="animal">{{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}</span>
                                 <br>
-                                <span class="breed">Breed: </span>
-                                <div  ng-show="!(angular.isArray(pet.breeds.breed))">
-                                <div class="ui label">{{pet.breeds.breed.$t}}</div>
-                                </div>
+                                <span class="breed">Breed: </span>   
+                                <div class="ui label" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</div>
                                 <div class="ui label" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</div>
                             </div>
                             <div class="description">
@@ -107,7 +108,6 @@
                                 <p>ID: {{pet.id.$t}}</p>
                             </div>
                             <div class="extra content">
-                                <div></div>
                                 <div class="ui label"  ng-repeat="(k, option) in pet.options.option">{{option.$t}}</div>
                                 <a ng-href="mailto:{{pet.contact.email.$t}}">
                                     <br>                                    
