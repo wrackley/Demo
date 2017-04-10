@@ -14,9 +14,19 @@
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-touch.min.js"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
       <script src="ui-bootstrap-tpls-2.5.0.min.js"></script>
-
+      <style>
+      .card-deck {
+      display: flex;
+      justify-content: flex-start;
+      flex-flow: row wrap; 
+      align-items: stretch;
+      }
+      .card-deck .card {
+      display: block;
+      flex-basis: 40%; /* change this value for each breakpoint*/
+      }
+      </style>
       <!-- Actual scripting logic for the Application -->
       <script>
          //this declares the HTML to be pushed to the user after it is dynamically created 
@@ -33,24 +43,24 @@
              //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
          function getAnimals(zipCode) {
          //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
-		 var petUrl = "https://api.petfinder.com/pet.find"
-		 console.log("Url: " + petUrl);
-		 $http({
-		 method: 'jsonp',
-		 url: petUrl,
-	         jsonpCallbackParam: 'callback',
-		 params: {
-			key: '7310a3202957b2aa5d90e0b18d9c4ce2',
-			format: 'json',
+         var petUrl = "https://api.petfinder.com/pet.find"
+         console.log("Url: " + petUrl);
+         $http({
+         method: 'jsonp',
+         url: petUrl,
+          jsonpCallbackParam: 'callback',
+         params: {
+         key: '7310a3202957b2aa5d90e0b18d9c4ce2',
+         format: 'json',
             		location: zipCode
-		 	}
-		 }).then(function successCallback(response) {
-	         console.log("success");
-		 console.log(response);
-	         $scope.pets = response.data.petfinder.pets.pet;
-		 }, function errorCallback(response) {
-		 console.log(response);
-		 });
+         }
+         }).then(function successCallback(response) {
+          console.log("success");
+         console.log(response);
+          $scope.pets = response.data.petfinder.pets.pet;
+         }, function errorCallback(response) {
+         console.log(response);
+         });
          }
              $scope.cardClicked = function(name) {
                  console.log("Card Clicked" + name);
@@ -86,43 +96,41 @@
             </form>
          </nav>
          <!-- this is where the search results are pushed to the user -->
-	    <div class="Container">  
-         <div class="row">
-            <div class="col-md-6 col-lg-4 col-xl-3" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
-		    <div class="card">
-               <img class="card-img-top" style="align: center;" ng-src="{{pet.media.photos.photo[3].$t}}" alt="Card image cap">
-               <div class="card-block">
-                  <h4 class="card-title">{{pet.name.$t}}</h4>
-                  <p class="card-text">
-                     <small class="text-muted">
-                  {{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}                  
-                  <p><span class="label label-default" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</span>
-                  <span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span></p>
-                  </small>
-                  </p>
-                  <div class="card-text">
-                     City: {{pet.contact.city.$t}}
-			  <br>
-                     State: {{pet.contact.state.$t}}
-			  <br>
-                     Zip: {{pet.contact.zip.$t}}
-			  <br>
-                     ID: {{pet.id.$t}}
-			  <br>
+         <div class="Container">
+               <div class="card-deck" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
+                  <div class="card">
+                     <img class="card-img-top" style="align: center;" ng-src="{{pet.media.photos.photo[3].$t}}" alt="Card image cap">
+                     <div class="card-block">
+                        <h4 class="card-title">{{pet.name.$t}}</h4>
+                        <p class="card-text">
+                           <small class="text-muted">
+                              {{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}                  
+                        <p><span class="label label-default" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</span>
+                        <span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span></p>
+                        </small>
+                        </p>
+                        <div class="card-text">
+                           City: {{pet.contact.city.$t}}
+                           <br>
+                           State: {{pet.contact.state.$t}}
+                           <br>
+                           Zip: {{pet.contact.zip.$t}}
+                           <br>
+                           ID: {{pet.id.$t}}
+                           <br>
+                        </div>
+                        <p class="card-text">
+                           <small class="text-muted">
+                           <span class="label label-default" ng-repeat="(k, option) in pet.options.option">{{option.$t}}</span>
+                           <br>
+                           <a ng-href="mailto:{{pet.contact.email.$t}}">Email Contact</a>
+                           </small>
+                        </p>
+                     </div>
                   </div>
-                  <p class="card-text">
-                     <small class="text-muted">
-                     <span class="label label-default" ng-repeat="(k, option) in pet.options.option">{{option.$t}}</span>
-			     <br>
-                     <a ng-href="mailto:{{pet.contact.email.$t}}">Email Contact</a>
-                     </small>
-                  </p>
                </div>
-            </div>
-		    </div>
-         </div>	   
+         </div>
       </div>
-	   </div>
    </body>
 </html>
 
