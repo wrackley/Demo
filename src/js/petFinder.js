@@ -57,10 +57,10 @@ app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
     }
     $scope.changePage = function(isFoward) {
         var offSet;
-        $scope.selectedRsltPerPage = !$scope.selectedRsltPerPage?25:$scope.selectedRsltPerPage;
+        var itemsPerPage = !$scope.selectedRsltPerPage?25:$scope.selectedRsltPerPage;
         if (isFoward) {
             $scope.page += 1;
-            offSet = $scope.page * $scope.selectedRsltPerPage;
+            offSet = $scope.page * itemsPerPage;
             getAnimals($scope.inputData.zipCode, offSet);
         } else if (!isFoward && $scope.page > 0) {
             $scope.page -= 1;
