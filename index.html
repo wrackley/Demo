@@ -97,8 +97,7 @@
                    getAnimals($scope.inputData.zipCode,offSet);
                 }
                 console.log("Page: " + $scope.page);
-                $location.hash('top');
-                 $anchorScroll();
+                window.scrollTo(0,0);
              }
          
          });
@@ -116,7 +115,7 @@
             </form>
          </nav>
          <!-- this is where the search results are pushed to the user -->
-         <div id="top" class="container-fluid">
+         <div class="container-fluid">
             <div class="card-deck">
                <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
                   <div style="text-align: center;">
