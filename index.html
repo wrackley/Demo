@@ -114,13 +114,11 @@
             <form class="form-inline">
                <input class="form-control mr-sm-2" type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
                <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
-               <select style="float: right;" ng-model="selectedAnimal"class="custom-select">
-                 <option selected>Open this select menu</option>
+               <select style="float: right;" ng-model="selectedAnimal" class="custom-select">
                  <option value="Cat">One</option>
                  <option value="Dog">Two</option>
                </select>
-               <select style="float: right;" ng-model="selectedSex"class="custom-select">
-                 <option selected>Open this select menu</option>
+               <select style="float: right;" ng-model="selectedSex" class="custom-select">
                  <option value="Male">One</option>
                  <option value="Female">Two</option>
                </select>
