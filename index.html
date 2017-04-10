@@ -44,7 +44,7 @@
              //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
          function getAnimals(zipCode, offSet) {
          //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
-         var animalType = $scope.selectedAnimal
+         var animalType = ($scope.selectedAnimal).toLowerCase();
          var petUrl = "https://api.petfinder.com/pet.find"
          console.log("Url: " + petUrl);
             console.log("Off set: " + offSet);
@@ -57,7 +57,7 @@
          format: 'json',
          location: zipCode,
          offset: offSet,
-         animal: (animalType).toLowerCase(),
+         animal: animalType
          sex: $scope.selectedSex
          }
          }).then(function successCallback(response) {
