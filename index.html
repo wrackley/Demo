@@ -114,18 +114,24 @@
                <input class="form-control mr-sm-2" type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
                <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
                
-               <select ng-model="selectedAnimal" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
+               <select ng-model="selectedAnimal" ng-show="pets" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
                  <option selected value>Both</option>
                  <option value="Cat">Cat</option>
                  <option value="Dog">Dog</option>
                </select>
-               <span class="label label-default" style="float: right;">Animal Type </span>
-               <select ng-model="selectedSex" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
+               <span ng-show="pets" class="label label-default" style="float: right;">Animal Type </span>
+               <select ng-model="selectedSex" ng-show="pets" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
                   <option selected value>Both</option>
                  <option value="M">Male</option>
                  <option value="F">Female</option>
                </select>
-               <span class="label label-default" style="float: right;">Gender </span>
+               <span ng-show="pets" class="label label-default" style="float: right;">Gender </span>
+              <!-- <select ng-model="selectedRsltPerPage" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
+                 <option selected value="25">25</option>
+                 <option value="50">50</option>
+                 <option value="100">100</option>
+               </select> -->
+               <span class="label label-default" style="float: right;">Results per Page </span>
             </form>
          </nav>
          <!-- this is where the search results are pushed to the user -->
