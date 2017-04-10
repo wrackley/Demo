@@ -59,7 +59,7 @@
          }).then(function successCallback(response) {
           console.log("success");
          console.log(response);
-          console.log((response.data.petfinder.pets.pet).length);
+          console.log("Legnth: " + (response.data.petfinder.pets.pet).length);
           $scope.pets = response.data.petfinder.pets.pet;
          }, function errorCallback(response) {
          console.log(response);
@@ -149,8 +149,8 @@
             </div>
          </div>
          <div class="container" ng-show="pets">
-            <a style="text-align: left;" ng-show="$scope.page > 0" ng-click="changePage(false)">Previous </a>
-            <a style="text-align: right;" ng-click="changePage(true)"> Next</a>
+            <div  style="text-align: left;"><button type="button" class="btn" ng-show="$scope.page > 0" ng-click="changePage(false)">Previous </button></div>
+            <div style="text-align: right;"><button type="button" class="btn" ng-click="changePage(true)"> Next</button></div>
          </div>
       </div>
    </body>
