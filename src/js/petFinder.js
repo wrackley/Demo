@@ -65,6 +65,9 @@ app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
     }
     $scope.changePage = function(isFoward) {
         var offSet;
+        if(!$scope.selectedRsltPerPage) {
+            $scope.selectedRsltPerPage = "";
+        }
         if (isFoward) {
             $scope.page += 1;
             offSet = $scope.page * $scope.selectedRsltPerPage;
