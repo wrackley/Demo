@@ -52,6 +52,9 @@ app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
         console.log("Zip Code:" + $scope.inputData.zipCode);
 
     }
+    $scope.validateZipCode = function() {
+        console.log($scope.inputData.zipCode);
+    }
     $scope.getPic = function(picUrl) {
         return picUrl;
     }
