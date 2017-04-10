@@ -116,13 +116,13 @@
                <input class="form-control mr-sm-2" type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
                <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
                
-               <select ng-model="selectedAnimal" ng-show="pets" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
+               <select ng-model="selectedAnimal" ng-change="findPets()" ng-show="pets" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
                  <option selected value>Both</option>
                  <option value="Cat">Cat</option>
                  <option value="Dog">Dog</option>
                </select>
                <span ng-show="pets" class="label label-default" style="float: right;">Animal Type </span>
-               <select ng-model="selectedSex" ng-show="pets" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
+               <select ng-model="selectedSex" ng-change="findPets()" ng-show="pets" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
                   <option selected value>Both</option>
                  <option value="M">Male</option>
                  <option value="F">Female</option>
@@ -139,7 +139,7 @@
          <!-- this is where the search results are pushed to the user -->
          <div class="container-fluid">
             <div class="card-deck">
-               <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t' | filter: {animal:{$t: selectedAnimal}} | filter: {sex:{$t: selectedSex}}">
+               <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
                   <div style="text-align: center;">
                   <img class="card-img-top" style="align: center;" ng-src="{{getPic(pet.media.photos.photo[3].$t)}}" alt="No image found">
                   </div>
