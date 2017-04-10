@@ -1,0 +1,11 @@
+.card-deck {
+	display: flex;
+	justify-content: flex-start;
+	flex-flow: row wrap;
+	align-items: stretch;
+}
+
+.card-deck .card {
+	display: block;
+	flex-basis: 20%;
+}
