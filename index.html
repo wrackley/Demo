@@ -80,19 +80,18 @@
                  $scope.inputData.numCats = "";
                  $scope.searchResults = "";
              }
-             $scope.getPic = function(picUrl) {
-                console.log(picUrl);
+             $scope.getPic = function(picUrl) {                
                 return picUrl;
              }
              $scope.changePage = function(isFoward) {
                 var offSet;
                 if(isFoward) {
                    $scope.page += 1;
-                   offSet = $scope.page*25
+                   offSet = ($scope.page*25).toString();
                    getAnimals($scope.inputData.zipCode,offSet);
                 } else if(!isFoward && $scope.page > 0) {
                    $scope.page -= 1;
-                   offSet = $scope.page*25;
+                   offSet = ($scope.page*25).toString();
                    getAnimals($scope.inputData.zipCode,offSet);
                 }
                 console.log($scope.page);
