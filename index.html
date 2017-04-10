@@ -117,7 +117,9 @@
          <div class="container-fluid">
             <div class="card-deck">
                <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
+                  <div style="text-align: center;">
                   <img class="card-img-top" style="align: center;" ng-src="{{getPic(pet.media.photos.photo[3].$t)}}" alt="Card image cap">
+                  </div>
                   <div class="card-block">
                      <h4 class="card-title">{{pet.name.$t}}</h4>
                      <p class="card-text">
