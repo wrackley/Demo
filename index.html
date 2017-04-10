@@ -63,8 +63,9 @@
                      <p class="card-text">
                         <small class="text-muted">
                            {{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}                  
-                     <p><span class="label label-default" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</span>
-                     <span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span></p>
+                     <span class="label label-default" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</span>
+                     <span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span>
+                     <span ng-class="pet.status.$t=='A'?label label-success:pet.status.$t=='H'?label label-warning:label label-danger">{{pet.status.$t=='A'?Avalible:pet.status.$t=='H'?Hold:pet.status.$t=='P'?Pending:Adopted/Removed}}</span>
                      </small>
                      </p>
                      <div class="card-text">
@@ -74,7 +75,7 @@
                         <br>
                         Zip: {{pet.contact.zip.$t}}
                         <br>
-                        ID: {{pet.id.$t}}
+                        Age: {{pet.age.$t}}
                         <br>
                      </div>
                      <p class="card-text">
