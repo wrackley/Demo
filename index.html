@@ -20,6 +20,16 @@
 	      .card-columns {
 		    column-count: 4;		  
 		}
+	      .card-deck {
+	  display: flex;
+	  justify-content: flex-start;
+	  flex-flow: row wrap; 
+	  align-items: stretch;
+	}
+	.card-deck .card {
+	  display: block;
+	  flex-basis: 33.3%; /* change this value for each breakpoint*/
+	}
       </style>
       <!-- Actual scripting logic for the Application -->
       <script>
@@ -91,7 +101,7 @@
          </nav>
          <!-- this is where the search results are pushed to the user -->
 	      
-         <div class="card-columns">
+         <div class="card-deck">
             <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
                <img class="card-img-top" style="align: center;" ng-src="{{pet.media.photos.photo[3].$t}}" alt="Card image cap">
                <div class="card-block">
