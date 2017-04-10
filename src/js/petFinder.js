@@ -62,7 +62,7 @@ app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
               oldZipValue=$scope.inputData.zipCode;
               console.log(oldZipValue);
         } else {
-            $scope.zipCode = oldZipValue;
+            $scope.inputData.zipCode = oldZipValue;
         }
     }
     $scope.getPic = function(picUrl) {
