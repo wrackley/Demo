@@ -26,6 +26,10 @@
          display: block;
          flex-basis: 20%; 
          }
+         .affix {
+          top:50px;
+          position:fixed;
+         }
       </style>
       <!-- Actual scripting logic for the Application -->
       <script>
@@ -114,7 +118,7 @@
       <!-- declares the name of a controller to be used in angularjs code -->
       <div ng-controller="findLocalPetsCtrl">
          <!-- Declares the name of the form, will be used to validate entries in angularjs -->
-          <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+          <nav class="navbar navbar-light bg-faded" data-spy="affix" data-offset-top="197">
             <form class="form-inline">
                <input class="form-control mr-sm-2" type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
                <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
