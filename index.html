@@ -118,7 +118,7 @@
             <div class="card-deck">
                <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
                   <div style="text-align: center;">
-                  <img class="card-img-top" style="align: center;" ng-src="{{getPic(pet.media.photos.photo[3].$t)}}" alt="Card image cap">
+                  <img class="card-img-top" style="align: center;" ng-src="{{getPic(pet.media.photos.photo[3].$t)}}" alt="index.svg">
                   </div>
                   <div class="card-block">
                      <h4 class="card-title">{{pet.name.$t}}</h4>
@@ -151,8 +151,7 @@
             </div>
          </div>
          <div class="container" ng-show="pets">
-            <div  style="text-align: left;" ng-show="page>0"><button type="button" class="btn" ng-click="changePage(false)">Previous</button></div>
-            <div style="text-align: right;" ng-hide="petLength<25"><button type="button" class="btn" ng-click="changePage(true)">Next</button></div>
+            <div><h4 style="text-align: left;" ng-show="page>0" ><button type="button" class="btn" ng-click="changePage(false)">Previous</button></h4><h4 ng-show="page<25" style="text-align: right;"><button type="button" class="btn" ng-click="changePage(true)">Next</button></h4></div>            
          </div>
       </div>
    </body>
