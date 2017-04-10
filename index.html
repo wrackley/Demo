@@ -23,7 +23,7 @@
       align-items: stretch;
       }
       .card-deck .card {
-      display: flex;
+      display: block;
       flex-basis: 33.3%; /* change this value for each breakpoint*/
       }
       </style>
@@ -96,7 +96,7 @@
             </form>
          </nav>
          <!-- this is where the search results are pushed to the user -->
-               <div class="card-deck" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
+               <div class="row-fluid" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
                   <div class="card">
                      <img class="card-img-top" style="align: center;" ng-src="{{pet.media.photos.photo[3].$t}}" alt="Card image cap">
                      <div class="card-block">
