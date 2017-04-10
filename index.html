@@ -57,12 +57,11 @@
          offset: offSet
          }
          }).then(function successCallback(response) {
-          console.log("success");
-         console.log(response);
+          console.log("success");         
           console.log("Legnth: " + (response.data.petfinder.pets.pet).length);
           $scope.pets = response.data.petfinder.pets.pet;
          }, function errorCallback(response) {
-         console.log(response);
+            console.log(response);
          });
          }
              $scope.cardClicked = function(name) {
@@ -72,7 +71,7 @@
              $scope.findPets = function() {
                  //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
                  getAnimals($scope.inputData.zipCode,0);
-                 console.log("Pets: " + pets);
+                 console.log(pets);
                  console.log("Zip Code:" + $scope.inputData.zipCode);
          
              }
@@ -96,7 +95,7 @@
                    offSet = $scope.page*25;
                    getAnimals($scope.inputData.zipCode,offSet);
                 }
-                console.log($scope.page);
+                console.log("Page: " + $scope.page);
              }
          
          });
@@ -149,7 +148,7 @@
             </div>
          </div>
          <div class="container" ng-show="pets">
-            <div  style="text-align: left;"><button type="button" class="btn" ng-show="$scope.page > 0" ng-click="changePage(false)">Previous </button></div>
+            <div  style="text-align: left;" ng-show="page>0"><button type="button" class="btn" ng-click="changePage(false)">Previous </button></div>
             <div style="text-align: right;"><button type="button" class="btn" ng-click="changePage(true)"> Next</button></div>
          </div>
       </div>
