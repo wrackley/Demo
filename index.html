@@ -41,13 +41,14 @@
              $scope.page = 0;
          
              //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
-         function getAnimals(zipCode) {
+         function getAnimals(zipCode, offset) {
          //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
          var petUrl = "https://api.petfinder.com/pet.find"
          console.log("Url: " + petUrl);
          $http({
          method: 'jsonp',
          url: petUrl,
+         offset: offset,
           jsonpCallbackParam: 'callback',
          params: {
          key: '7310a3202957b2aa5d90e0b18d9c4ce2',
@@ -68,7 +69,7 @@
              }
              $scope.findPets = function() {
                  //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
-                 getAnimals($scope.inputData.zipCode);
+                 getAnimals($scope.inputData.zipCode,0);
                  console.log("Pets: " + pets);
                  console.log("Zip Code:" + $scope.inputData.zipCode);
          
@@ -78,17 +79,21 @@
                  $scope.inputData.numDogs = "";
                  $scope.inputData.numCats = "";
                  $scope.searchResults = "";
-                 html = "";
              }
              $scope.getPic = function(picUrl) {
                 console.log(picUrl);
                 return picUrl;
              }
              $scope.changePage = function(isFoward) {
+                var offSet;
                 if(isFoward) {
                    $scope.page += 1;
+                   offSet = $scope.page*25
+                   getAnimals($scope.inputData.zipCode,offSet);
                 } else if(!isFoward && $scope.page > 0) {
                    $scope.page -= 1;
+                   offSet = $scope.page*25;
+                   getAnimals($scope.inputData.zipCode,offSet);
                 }
                 console.log($scope.page);
              }
