@@ -11,18 +11,10 @@ app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
     function getAnimals(zipCode, offSet) {
         //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
         var petUrl = "https://api.petfinder.com/pet.find"
-        if(!$scope.selectedRsltPerPage){
-            $scope.selectedRsltPerPage = "";
-        }
-        if(!$scope.selectedAnimal) {
-            $scope.selectedAnimal = "";
-        }
-        if(!$scope.selectedSex) {
-            $scope.selectedSex = "";
-        }
-        if(!offSet) {
-            offSet = "";
-        }
+        $scope.selectedRsltPerPage = !$scope.selectedRsltPerPage?"":$scope.selectedRsltPerPage;
+        $scope.selectedAnimal = !$scope.selectedAnimal?"":$scope.selectedAnimal;
+        $scope.selectedSex = !$scope.selectedSex?"":$scope.selectedSex
+        offSet = !offSet?"":offSet;
         console.log("Url: " + petUrl);
         console.log("Off set: " + offSet);
         $http({
@@ -65,9 +57,7 @@ app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
     }
     $scope.changePage = function(isFoward) {
         var offSet;
-        if(!$scope.selectedRsltPerPage) {
-            $scope.selectedRsltPerPage = "";
-        }
+        $scope.selectedRsltPerPage = !$scope.selectedRsltPerPage?25:$scope.selectedRsltPerPage;
         if (isFoward) {
             $scope.page += 1;
             offSet = $scope.page * $scope.selectedRsltPerPage;
