@@ -59,7 +59,7 @@
          }).then(function successCallback(response) {
           console.log("success");
           $scope.pets = response.data.petfinder.pets.pet;
-          $scope.petLegnth = ($scope.pets).length
+          $scope.petLength = ($scope.pets).length
           console.log("Length:" + $scope.petLength); 
          }, function errorCallback(response) {
             console.log(response);
@@ -117,7 +117,7 @@
          <!-- this is where the search results are pushed to the user -->
          <div class="container-fluid">
             <div class="card-deck">
-               <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
+               <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t' | | filter: {animal:'Cat'}">
                   <div style="text-align: center;">
                   <img class="card-img-top" style="align: center;" ng-src="{{getPic(pet.media.photos.photo[3].$t)}}" alt="index.svg">
                   </div>
