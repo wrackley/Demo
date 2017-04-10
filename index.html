@@ -13,133 +13,43 @@
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-resource.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-touch.min.js"></script>
+      <script src="/src/js/petFinder.js"></script>
+      <script src="/src/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
-      <script src="ui-bootstrap-tpls-2.5.0.min.js"></script>
-      <style>
-         .card-deck {
-         display: flex;
-         justify-content: flex-start;
-         flex-flow: row wrap; 
-         align-items: stretch;
-         }
-         .card-deck .card {
-         display: block;
-         flex-basis: 20%; 
-         }
-      </style>
+      <link rel="stylesheet" href="/src/css/style.css">
       <!-- Actual scripting logic for the Application -->
-      <script>
-         //this declares the HTML to be pushed to the user after it is dynamically created 
-         var pets;
-         //stadard declaration of the Angular JS application name, imports some needed modules in order for the code to compile correctly 
-         var app = angular.module('findLocalPets', ['ngSanitize', 'ngResource']);
-         app.config(['$sceProvider', function($sceProvider) {
-             $sceProvider.enabled(false);
-         }]);
-         app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
-         
-             $scope.page = 0;
-
-         
-             //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
-         function getAnimals(zipCode, offSet) {
-         //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
-         var petUrl = "https://api.petfinder.com/pet.find"
-         console.log("Url: " + petUrl);
-            console.log("Off set: " + offSet);
-         $http({
-         method: 'jsonp',
-         url: petUrl,         
-          jsonpCallbackParam: 'callback',
-         params: {
-         key: '7310a3202957b2aa5d90e0b18d9c4ce2',
-         format: 'json',
-         location: zipCode,
-         offset: offSet,
-         animal: angular.lowercase($scope.selectedAnimal),
-         count: $scope.selectedRsltPerPage,
-         sex: $scope.selectedSex
-         }
-         }).then(function successCallback(response) {
-          console.log("success");
-          console.log(response);
-          $scope.pets = response.data.petfinder.pets.pet;
-          $scope.petLength = ($scope.pets).length
-          console.log("Length:" + $scope.petLength); 
-         }, function errorCallback(response) {
-            console.log(response);
-         });
-         }
-             $scope.cardClicked = function(name) {
-                 console.log("Card Clicked" + name);
-                 $scope.showModal = !$scope.showModal;
-             }
-             $scope.findPets = function() {
-                 //calls the PetFinderAPI passing in the user inputed zipCode and number of results for each pet type
-                 $scope.page = 0;
-                 getAnimals($scope.inputData.zipCode,0);
-                 console.log(pets);
-                 console.log("Zip Code:" + $scope.inputData.zipCode);
-         
-             }
-             $scope.clearResults = function() {
-                 $scope.inputData.zipCode = "";
-                 $scope.inputData.numDogs = "";
-                 $scope.inputData.numCats = "";
-                 $scope.searchResults = "";
-             }
-             $scope.getPic = function(picUrl) {                
-                return picUrl;
-             }
-             $scope.changePage = function(isFoward) {
-                var offSet;
-                if(isFoward) {
-                   $scope.page += 1;
-                   offSet = $scope.page*$scope.selectedRsltPerPage;
-                   getAnimals($scope.inputData.zipCode,offSet);
-                } else if(!isFoward && $scope.page > 0) {
-                   $scope.page -= 1;
-                   offSet = $scope.page*$scope.selectedRsltPerPage;
-                   getAnimals($scope.inputData.zipCode,offSet);
-                }
-                console.log("Page: " + $scope.page);
-                window.scrollTo(0,0);
-             }
-         
-         });
-      </script>
+      <script src="/src/js/petFinder.js"></script>
    </head>
    <!-- Declares the name of the app -->
    <body ng-app="findLocalPets" data-spy="scroll" data-target=".navbar" data-offset="50">
       <!-- declares the name of a controller to be used in angularjs code -->
       <div ng-controller="findLocalPetsCtrl">
          <!-- Declares the name of the form, will be used to validate entries in angularjs -->
-          <nav class="navbar navbar-light bg-faded">
+         <nav class="navbar navbar-light bg-faded">
             <form class="form-inline">
                <input class="form-control mr-sm-2" type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
                <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
                <button ng-show="pets" class="btn btn-secondary btn-sm" ng-click="findPets()" style="float: right;" type="submit">Update Results</button>
-               <h3>
-               <select ng-model="selectedAnimal" ng-show="pets" class="form-control" style="float: right;" value="">
-                 <option selected value>Both</option>
-                 <option value="Cat">Cat</option>
-                 <option value="Dog">Dog</option>
-               </select>
-               <span ng-show="pets" class="label label-default" style="float: right;">Animal Type </span>
-               <select ng-model="selectedSex" ng-show="pets" class="form-control" style="float: right;" value="">
-                  <option selected value>Both</option>
-                 <option value="M">Male</option>
-                 <option value="F">Female</option>
-               </select>
-               <span ng-show="pets" class="label label-default" style="float: right;">Gender </span>
-              <select ng-show="pets" ng-model="selectedRsltPerPage" class="form-control" style="float: right;" value="">
-                 <option selected value>25</option>
-                 <option value="50">50</option>
-                 <option value="100">100</option>
-               </select> 
-               <span ng-show="pets" class="label label-default" style="float: right;">Results per Page </span>
-               </h3>
-               
+               <h5>
+                  <select ng-model="selectedAnimal" ng-show="pets" class="form-control" style="float: right;" value="">
+                     <option selected value>Both</option>
+                     <option value="Cat">Cat</option>
+                     <option value="Dog">Dog</option>
+                  </select>
+                  <span ng-show="pets" class="label label-default" style="float: right;">Animal Type </span>
+                  <select ng-model="selectedSex" ng-show="pets" class="form-control" style="float: right;" value="">
+                     <option selected value>Both</option>
+                     <option value="M">Male</option>
+                     <option value="F">Female</option>
+                  </select>
+                  <span ng-show="pets" class="label label-default" style="float: right;">Gender </span>
+                  <select ng-show="pets" ng-model="selectedRsltPerPage" class="form-control" style="float: right;" value="">
+                     <option selected value>25</option>
+                     <option value="50">50</option>
+                     <option value="100">100</option>
+                  </select>
+                  <span ng-show="pets" class="label label-default" style="float: right;">Results per Page </span>
+               </h5>
             </form>
          </nav>
          <!-- this is where the search results are pushed to the user -->
@@ -147,7 +57,7 @@
             <div class="card-deck">
                <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
                   <div style="text-align: center;">
-                  <img class="card-img-top" style="align: center;" ng-src="{{getPic(pet.media.photos.photo[3].$t)}}" alt="No image found">
+                     <img class="card-img-top" style="align: center;" ng-src="{{getPic(pet.media.photos.photo[3].$t)}}" alt="No image found">
                   </div>
                   <div class="card-block">
                      <h4 class="card-title">{{pet.name.$t}}</h4>
