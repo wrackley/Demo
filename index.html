@@ -30,19 +30,19 @@
                <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
                <button ng-show="pets" class="btn btn-secondary btn-sm" ng-click="findPets()" style="float: right;" type="submit">Update Results</button>
                <h6>
-                  <select ng-model="selectedAnimal" ng-show="pets" class="form-control" style="float: right;" value="">
+                  <select ng-model="selectedAnimal" ng-show="pets" style="float: right;" value="">
                      <option selected value>Both</option>
                      <option value="Cat">Cat</option>
                      <option value="Dog">Dog</option>
                   </select>
                   <span ng-show="pets" class="label label-default" style="float: right;">Animal Type </span>
-                  <select ng-model="selectedSex" ng-show="pets" class="form-control" style="float: right;" value="">
+                  <select ng-model="selectedSex" ng-show="pets" style="float: right;" value="">
                      <option selected value>Both</option>
                      <option value="M">Male</option>
                      <option value="F">Female</option>
                   </select>
                   <span ng-show="pets" class="label label-default" style="float: right;">Gender </span>
-                  <select ng-show="pets" ng-model="selectedRsltPerPage" class="form-control" style="float: right;" value="">
+                  <select ng-show="pets" ng-model="selectedRsltPerPage" style="float: right;" value="">
                      <option selected value>25</option>
                      <option value="50">50</option>
                      <option value="100">100</option>
