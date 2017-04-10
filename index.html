@@ -56,7 +56,7 @@
          format: 'json',
          location: zipCode,
          offset: offSet,
-         animal: $scope.selectedAnimal,
+         animal: ($scope.selectedAnimal).toLowerCase(),
          sex: $scope.selectedSex
          }
          }).then(function successCallback(response) {
