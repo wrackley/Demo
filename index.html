@@ -26,10 +26,6 @@
          display: block;
          flex-basis: 20%; 
          }
-         .affix {
-          top:50px;
-          position:fixed;
-         }
       </style>
       <!-- Actual scripting logic for the Application -->
       <script>
@@ -114,33 +110,34 @@
       </script>
    </head>
    <!-- Declares the name of the app -->
-   <body ng-app="findLocalPets">
+   <body ng-app="findLocalPets" data-spy="scroll" data-target=".navbar" data-offset="50">
       <!-- declares the name of a controller to be used in angularjs code -->
       <div ng-controller="findLocalPetsCtrl">
          <!-- Declares the name of the form, will be used to validate entries in angularjs -->
-          <nav class="navbar navbar-light bg-faded" data-spy="affix" data-offset-top="197">
+          <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
             <form class="form-inline">
                <input class="form-control mr-sm-2" type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
                <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
                
-               <select ng-model="selectedAnimal" ng-change="findPets()" ng-show="pets" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
+               <select ng-model="selectedAnimal" ng-show="pets" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
                  <option selected value>Both</option>
                  <option value="Cat">Cat</option>
                  <option value="Dog">Dog</option>
                </select>
                <span ng-show="pets" class="label label-default" style="float: right;">Animal Type </span>
-               <select ng-model="selectedSex" ng-change="findPets()" ng-show="pets" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
+               <select ng-model="selectedSex" ng-show="pets" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
                   <option selected value>Both</option>
                  <option value="M">Male</option>
                  <option value="F">Female</option>
                </select>
                <span ng-show="pets" class="label label-default" style="float: right;">Gender </span>
-              <select ng-model="selectedRsltPerPage" ng-change="findPets()" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
+              <select ng-show="pets" ng-model="selectedRsltPerPage" class="custom-select mb-2 mr-sm-2 mb-sm-0" style="float: right;" value="">
                  <option selected value>25</option>
                  <option value="50">50</option>
                  <option value="100">100</option>
                </select> 
-               <span class="label label-default" style="float: right;">Results per Page </span>
+               <span ng-show="pets" class="label label-default" style="float: right;">Results per Page </span>
+               <button ng-show="pets" class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Update Results</button>
             </form>
          </nav>
          <!-- this is where the search results are pushed to the user -->
