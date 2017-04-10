@@ -100,7 +100,7 @@
             </form>
          </nav>
          <!-- this is where the search results are pushed to the user -->
-	      
+	    <div class="Container">  
          <div class="card-deck">
             <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
                <img class="card-img-top" style="align: center;" ng-src="{{pet.media.photos.photo[3].$t}}" alt="Card image cap">
@@ -134,6 +134,7 @@
             </div>
          </div>	   
       </div>
+	   </div>
    </body>
 </html>
 
