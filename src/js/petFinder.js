@@ -11,6 +11,18 @@ app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
     function getAnimals(zipCode, offSet) {
         //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
         var petUrl = "https://api.petfinder.com/pet.find"
+        if(!$scope.selectedRsltPerPage){
+            $scope.selectedRsltPerPage = "";
+        }
+        if(!$scope.selectedAnimal) {
+            $scope.selectedAnimal = "";
+        }
+        if(!$scope.selectedSex) {
+            $scope.selectedSex = "";
+        }
+        if(!offSet) {
+            offSet = "";
+        }
         console.log("Url: " + petUrl);
         console.log("Off set: " + offSet);
         $http({
