@@ -68,7 +68,7 @@
                      <span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span>
                      <br>                     
                      </small>
-                      <span syle="color: black;"ng-class="pet.status.$t=='A'?'label-success':pet.status.$t=='H'?'label-warning':'label-danger'">{{pet.status.$t=='A'?"Avalible":pet.status.$t=='H'?"Hold":pet.status.$t=='P'?"Pending":"Adopted/Removed"}}</span>
+                      <small><span syle="color: black;"ng-class="pet.status.$t=='A'?'label label-success':pet.status.$t=='H'?'label label-warning':'label label-danger'">{{pet.status.$t=='A'?"Avalible":pet.status.$t=='H'?"Hold":pet.status.$t=='P'?"Pending":"Adopted/Removed"}}</span></small>
                      </p>
                      <div class="card-text">
                         City: {{pet.contact.city.$t}}
