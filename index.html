@@ -16,18 +16,17 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
       <script src="ui-bootstrap-tpls-2.5.0.min.js"></script>
       <style>
-        /* .card-deck {
-  display: flex;
-  justify-content: flex-start;
-  flex-flow: row wrap; 
-  align-items: stretch;
-}
-.card-deck .card {
-  display: block;
-  flex-basis: 20%; 
-}*/
+         .card-deck {
+         display: flex;
+         justify-content: flex-start;
+         flex-flow: row wrap; 
+         align-items: stretch;
+         }
+         .card-deck .card {
+         display: block;
+         flex-basis: 20%; 
+         }
       </style>
-
       <!-- Actual scripting logic for the Application -->
       <script>
          //this declares the HTML to be pushed to the user after it is dynamically created 
@@ -98,38 +97,38 @@
          </nav>
          <!-- this is where the search results are pushed to the user -->
          <div class="container-fluid">
-               <div class="card-deck">
-                  <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
-                     <img class="card-img-top" style="align: center;" ng-src="{{pet.media.photos.photo[1].$t}}" alt="Card image cap">
-                     <div class="card-block">
-                        <h4 class="card-title">{{pet.name.$t}}</h4>
-                        <p class="card-text">
-                           <small class="text-muted">
-                              {{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}                  
-                        <p><span class="label label-default" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</span>
-                        <span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span></p>
-                        </small>
-                        </p>
-                        <div class="card-text">
-                           City: {{pet.contact.city.$t}}
-                           <br>
-                           State: {{pet.contact.state.$t}}
-                           <br>
-                           Zip: {{pet.contact.zip.$t}}
-                           <br>
-                           ID: {{pet.id.$t}}
-                           <br>
-                        </div>
-                        <p class="card-text">
-                           <small class="text-muted">
-                           <span class="label label-default" ng-repeat="(k, option) in pet.options.option">{{option.$t}}</span>
-                           <br>
-                           <a ng-href="mailto:{{pet.contact.email.$t}}">Email Contact</a>
-                           </small>
-                        </p>
+            <div class="card-deck">
+               <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
+                  <img class="card-img-top" style="align: center;" ng-src="{{pet.media.photos.photo[1].$t}}" alt="Card image cap">
+                  <div class="card-block">
+                     <h4 class="card-title">{{pet.name.$t}}</h4>
+                     <p class="card-text">
+                        <small class="text-muted">
+                           {{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}}                  
+                     <p><span class="label label-default" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</span>
+                     <span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span></p>
+                     </small>
+                     </p>
+                     <div class="card-text">
+                        City: {{pet.contact.city.$t}}
+                        <br>
+                        State: {{pet.contact.state.$t}}
+                        <br>
+                        Zip: {{pet.contact.zip.$t}}
+                        <br>
+                        ID: {{pet.id.$t}}
+                        <br>
                      </div>
+                     <p class="card-text">
+                        <small class="text-muted">
+                        <span class="label label-default" ng-repeat="(k, option) in pet.options.option">{{option.$t}}</span>
+                        <br>
+                        <a ng-href="mailto:{{pet.contact.email.$t}}">Email Contact</a>
+                        </small>
+                     </p>
                   </div>
                </div>
+            </div>
          </div>
          <div class="container">
             <a style="align: center;">Next</a>
