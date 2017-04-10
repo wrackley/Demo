@@ -38,7 +38,7 @@
          }]);
          app.controller('findLocalPetsCtrl', function($scope, $http, $resource, $sce) {
          
-             $scope.showModal = false;
+             $scope.page = 0;
          
              //the GET parameters are strung together in an URL and uses JSONP and a callback for cross domain calls
          function getAnimals(zipCode) {
@@ -83,6 +83,14 @@
              $scope.getPic = function(picUrl) {
                 console.log(picUrl);
                 return picUrl;
+             }
+             $scope.changePage = function(isFoward) {
+                if(isFoward) {
+                   $scope.page += 1;
+                } elseif(!isFoward && $scope.page > 0) {
+                   $scope.page -= 1;
+                }
+                console.log($scope.page);
              }
          
          });
@@ -135,7 +143,8 @@
             </div>
          </div>
          <div class="container">
-            <a style="align: center;">Next</a>
+            <a style="align: center;" ng-click="changePage(false)">Previous </a>
+            <a style="align: center;" ng-click="changePage(true)"> Next</a>
          </div>
       </div>
    </body>
