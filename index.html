@@ -65,6 +65,7 @@
                            {{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}} {{prt.status.$t}}
                            <br>
                      Breed: <span class="label label-default" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</span>
+                     <br>
                      Availability: <span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span>
                      <br>                     
                      </small>
