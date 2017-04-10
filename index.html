@@ -15,18 +15,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-touch.min.js"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
       <script src="ui-bootstrap-tpls-2.5.0.min.js"></script>
-      <style>
-      .card-deck {
-      display: flex;
-      justify-content: flex-start;
-      flex-flow: row wrap; 
-      align-items: stretch;
-      }
-      .card-deck .card {
-      display: block;
-      flex-basis: 33.3%; /* change this value for each breakpoint*/
-      }
-      </style>
+
       <!-- Actual scripting logic for the Application -->
       <script>
          //this declares the HTML to be pushed to the user after it is dynamically created 
@@ -96,7 +85,7 @@
             </form>
          </nav>
          <!-- this is where the search results are pushed to the user -->
-               <div class="row-fluid" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
+               <div class="card-deck" style="column-count: 4;" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t'">
                   <div class="card">
                      <img class="card-img-top" style="align: center;" ng-src="{{pet.media.photos.photo[3].$t}}" alt="Card image cap">
                      <div class="card-block">
