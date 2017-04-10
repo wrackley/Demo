@@ -114,20 +114,22 @@
             <form class="form-inline">
                <input class="form-control mr-sm-2" type="text" placeholder="Zip Code" ng-model="inputData.zipCode" ng-pattern="/^\d{5}(?:[-\s]\d{4})?$/" required>
                <button class="btn btn-outline-success my-2 my-sm-0" ng-click="findPets()" type="submit">Search</button>
-               <select style="float: right;" ng-model="selectedAnimal" class="custom-select">
-                 <option value="Cat">One</option>
-                 <option value="Dog">Two</option>
+               <label class="mr-sm-2" for="inlineFormCustomSelect" style="float: right;">Animal Type</label>
+               <select style="float: right;" ng-model="selectedAnimal" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                 <option value="Cat">Cat</option>
+                 <option value="Dog">Dog</option>
                </select>
-               <select style="float: right;" ng-model="selectedSex" class="custom-select">
-                 <option value="Male">One</option>
-                 <option value="Female">Two</option>
+               <label class="mr-sm-2" for="inlineFormCustomSelect" style="float: right;">Sex: </label>
+               <select style="float: right;" ng-model="selectedSex" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                 <option value="M">Male</option>
+                 <option value="F">Female</option>
                </select>
             </form>
          </nav>
          <!-- this is where the search results are pushed to the user -->
          <div class="container-fluid">
             <div class="card-deck">
-               <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t' | filter: {animal:{$t: selectedAnimal}} | filter: {sex:{$t: selectedSex=='Male'?'M':'F'}}">
+               <div class="card" ng-click="cardClicked(pet.id.$t)" ng-repeat="pet in pets | orderBy: 'name.$t' | filter: {animal:{$t: selectedAnimal}} | filter: {sex:{$t: selectedSex}}">
                   <div style="text-align: center;">
                   <img class="card-img-top" style="align: center;" ng-src="{{getPic(pet.media.photos.photo[3].$t)}}" alt="index.svg">
                   </div>
