@@ -88,10 +88,14 @@
                 if(isFoward) {
                    $scope.page += 1;
                    offSet = ($scope.page*25).toString();
+                   console.log("offset: " + offset);
+                   $scope.pets = [];
                    getAnimals($scope.inputData.zipCode,offSet);
                 } else if(!isFoward && $scope.page > 0) {
                    $scope.page -= 1;
                    offSet = ($scope.page*25).toString();
+                   console.log("offset: " + offset);
+                   $scope.pets = [];
                    getAnimals($scope.inputData.zipCode,offSet);
                 }
                 console.log($scope.page);
