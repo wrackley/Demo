@@ -65,11 +65,10 @@
                            {{pet.sex.$t=="M"?"Male":"Female"}} {{pet.animal.$t}} {{prt.status.$t}}
                            <br>
                      Breed: <span class="label label-default" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</span>
-                     <br>
-                     Availability: <span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span>
+                     <span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span>
                      <br>                     
                      </small>
-                      <small><span syle="color: black;"ng-class="pet.status.$t=='A'?'label label-success':pet.status.$t=='H'?'label label-warning':'label label-danger'">{{pet.status.$t=='A'?"Avalible":pet.status.$t=='H'?"Hold":pet.status.$t=='P'?"Pending":"Adopted/Removed"}}</span></small>
+                      Availability: <small><span syle="color: black;"ng-class="pet.status.$t=='A'?'label label-success':pet.status.$t=='H'?'label label-warning':'label label-danger'">{{pet.status.$t=='A'?"Avalible":pet.status.$t=='H'?"Hold":pet.status.$t=='P'?"Pending":"Adopted/Removed"}}</span></small>
                      </p>
                      <div class="card-text">
                         City: {{pet.contact.city.$t}}
