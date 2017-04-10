@@ -57,9 +57,10 @@
          offset: offSet
          }
          }).then(function successCallback(response) {
-          console.log("success");         
-          console.log("Legnth: " + (response.data.petfinder.pets.pet).length);
+          console.log("success");
           $scope.pets = response.data.petfinder.pets.pet;
+          $scope.petLegnth = $scope.pets.length
+          console.log("Length:" + $scope.petLength); 
          }, function errorCallback(response) {
             console.log(response);
          });
@@ -148,8 +149,8 @@
             </div>
          </div>
          <div class="container" ng-show="pets">
-            <div  style="text-align: left;" ng-show="page>0"><button type="button" class="btn" ng-click="changePage(false)">Previous </button></div>
-            <div style="text-align: right;"><button type="button" class="btn" ng-click="changePage(true)"> Next</button></div>
+            <div  style="text-align: left;" ng-show="page>0"><button type="button" class="btn" ng-click="changePage(false)">Previous</button></div>
+            <div style="text-align: right;" ng-hide="petLength<25"><button type="button" class="btn" ng-click="changePage(true)">Next</button></div>
          </div>
       </div>
    </body>
