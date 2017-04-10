@@ -61,6 +61,7 @@
          }
          }).then(function successCallback(response) {
           console.log("success");
+          console.log(response);
           $scope.pets = response.data.petfinder.pets.pet;
           $scope.petLength = ($scope.pets).length
           console.log("Length:" + $scope.petLength); 
