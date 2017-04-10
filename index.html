@@ -66,7 +66,7 @@
                            <br>
                      <span class="label label-default" ng-hide="angular.isArray(pet.breeds.breed)">{{pet.breeds.breed.$t}}</span>
                      <span class="label label-default" ng-repeat="(k, breed) in pet.breeds.breed">{{breed.$t}}</span>
-                     <span ng-class="{{pet.status.$t=='A'?label-success:pet.status.$t=='H'?label-warning:label-danger}}">{{pet.status.$t=='A'?Avalible:pet.status.$t=='H'?Hold:pet.status.$t=='P'?Pending:Adopted/Removed}}</span>
+                     <span ng-class="{{pet.status.$t=='A'?label-success:pet.status.$t=='H'?label-warning:label-danger}}">{{pet.status.$t=='A'?"Avalible":pet.status.$t=='H'?"Hold":pet.status.$t=='P'?"Pending":"Adopted/Removed"}}</span>
                      </small>
                      </p>
                      <div class="card-text">
@@ -78,6 +78,7 @@
                         <br>
                         Age: {{pet.age.$t}}
                         <br>
+                        Size: {{pet.size.$t=='S'?"Small":pet.size.$t=='M'?"Medium":pet.size.$t=='L'?"Large":"Extra-Large"}}
                      </div>
                      <p class="card-text">
                         <small class="text-muted">
