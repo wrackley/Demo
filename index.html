@@ -85,7 +85,7 @@
                         <span class="label label-default" ng-hide="angular.isArray(pet.options.option)">{{pet.breeds.breed.$t}}</span>
                         <span class="label label-default" ng-repeat="(k, option) in pet.options.option">{{option.$t}}</span>
                         <br>
-                        <a ng-href="mailto:{{pet.contact.email.$t}}?subject={{pet.name.$t}} - ID:{{pet.shelterId.$t}}">Email Contact</a>
+                        <a ng-href="mailto:{{pet.contact.email.$t}}?subject={{pet.name.$t}} - ID:{{pet.shelterId.$t}}" target="_blank">Email Contact</a>
                         </small>
                      </p>
                   </div>
